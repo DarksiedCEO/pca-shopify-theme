@@ -1,8 +1,49 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "pca_obsidian_landing": {
       "type": "pca-obsidian-landing",
-      "settings": {}
+      "settings": {
+        "eyebrow": "PCA™ Hydration Ritual",
+        "heading": "Water, elevated.",
+        "subheading": "The PCA™ Obsidian Hydration Fountain turns daily water into a luxury feline wellness ritual for cats who live beautifully.",
+        "product": "",
+        "cta_text": "Begin The Ritual",
+        "fallback_url": "",
+        "learn_more_url": "",
+        "learn_more_text": "Learn More",
+        "hero_image": "shopify://shop_images/PCA_OBSIDIAN_HERO_PORTRAIT_V1.png",
+        "hero_alt": "PCA Obsidian Hydration Fountain in a luxury home setting",
+        "edu_image": "shopify://shop_images/PCA_OBSIDIAN_EDUCATION_V1.png",
+        "lifestyle_image_1": "shopify://shop_images/PCA_OBSIDIAN_LIFESTYLE_01_V1.png",
+        "lifestyle_image_2": "shopify://shop_images/PCA_OBSIDIAN_LIFESTYLE_02_V1_eb2b5532-69ad-4169-9086-b2ac348fba11.png",
+        "lifestyle_image_3": "shopify://shop_images/PCA_OBSIDIAN_LIFESTYLE_03_V2.png",
+        "founder_quote": "<p>PCA was built for one reason: Sphynx cats deserve the same level of thoughtful design that their owners give to the rest of their home. Obsidian is the beginning of that standard.</p>",
+        "founder_name": "Andre",
+        "founder_title": "Founder, PCA™",
+        "guarantee_heading": "The PCA Promise",
+        "guarantee_body": "Every product we offer is selected with the same standards we would expect for our own cats. If you need assistance with your order, our team is here to help.",
+        "support_heading": "White-Glove Support",
+        "support_body": "Questions before or after your purchase? Our team is here to help with product guidance, order support, and everything in between.",
+        "contact_heading": "Direct Contact",
+        "contact_body": "Need assistance? Reach out directly and we'll make sure you're connected with the right member of the PCA team.",
+        "contact_email": "sales@pussycatalley.com",
+        "card_image_1": "shopify://shop_images/PCA_OBSIDIAN_FEATURE_MOVING_WATER_V1.png",
+        "card_image_2": "shopify://shop_images/PCA_OBSIDIAN_FEATURE_INTERIORS_V1.png",
+        "card_image_3": "shopify://shop_images/PCA_OBSIDIAN_FEATURE_STEEL_V1.png",
+        "email_heading": "The Ritual Starts Here",
+        "email_subheading": "Be first to access new releases, exclusive offers, feline wellness insights, and the products we're developing for the PCA ritual system.",
+        "email_placeholder": "Enter your email",
+        "email_cta": "Join The Alley"
+      }
     }
   },
   "order": [
