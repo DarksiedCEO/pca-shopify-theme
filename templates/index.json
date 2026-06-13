@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "pca_obsidian_landing": {
+      "type": "pca-obsidian-landing",
+      "settings": {}
+    }
+  },
+  "order": [
+    "pca_obsidian_landing"
+  ]
+}

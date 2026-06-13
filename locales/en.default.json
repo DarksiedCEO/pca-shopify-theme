@@ -1,0 +1,17 @@
+{
+  "accessibility": {
+    "skip_to_text": "Skip to content"
+  },
+  "general": {
+    "password_page": {
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "signup_form_email_label": "Email",
+      "signup_form_submit": "Notify me",
+      "signup_form_success": "We will send you an email when the store is open.",
+      "admin_link_html": "Are you the store owner? <a href=\"/admin\">Log in here</a>"
+    }
+  }
+}
