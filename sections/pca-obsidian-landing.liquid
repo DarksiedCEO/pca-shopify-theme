@@ -106,6 +106,127 @@
     </div>
   </div>
 
+  {%- comment -%} ── V4: Product Purchase Block ── {%- endcomment -%}
+  <div class="pca-purchase" id="pca-purchase">
+    <div class="pca-purchase__media">
+      {% if section.settings.product_image != blank %}
+        {{ section.settings.product_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'pca-purchase__img', alt: 'PCA Obsidian Hydration Fountain' }}
+      {% elsif pca_product != blank and pca_product.featured_image != blank %}
+        {{ pca_product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'pca-purchase__img', alt: pca_product.title }}
+      {% else %}
+        <div class="pca-purchase__img-placeholder"></div>
+      {% endif %}
+    </div>
+
+    <div class="pca-purchase__content">
+      <p class="pca-eyebrow">Add To Your Home</p>
+      <h2 class="pca-purchase__title">
+        {%- if pca_product != blank -%}{{ pca_product.title }}{%- else -%}PCA™ Obsidian Hydration Fountain{%- endif -%}
+      </h2>
+
+      {%- if pca_product != blank -%}
+        <p class="pca-purchase__price">
+          {%- if pca_variant.compare_at_price > pca_variant.price -%}
+            <span class="pca-purchase__price--compare">{{ pca_variant.compare_at_price | money }}</span>
+          {%- endif -%}
+          <span class="pca-purchase__price--current">{{ pca_variant.price | money }}</span>
+          {%- if pca_variant.compare_at_price > pca_variant.price -%}
+            <span class="pca-purchase__badge">Launch Pricing</span>
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      <ul class="pca-purchase__benefits">
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#c9a84c" stroke-width="1.2"/><path d="M5 8l2.5 2.5L11 5.5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Continuous water circulation
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#c9a84c" stroke-width="1.2"/><path d="M5 8l2.5 2.5L11 5.5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Luxury matte obsidian finish
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#c9a84c" stroke-width="1.2"/><path d="M5 8l2.5 2.5L11 5.5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Stainless steel drinking tray
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#c9a84c" stroke-width="1.2"/><path d="M5 8l2.5 2.5L11 5.5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Quiet operation — designed for living spaces
+        </li>
+        <li>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#c9a84c" stroke-width="1.2"/><path d="M5 8l2.5 2.5L11 5.5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Sphynx-first, built for any feline household
+        </li>
+      </ul>
+
+      <div class="pca-purchase__actions">
+        {% if pca_product != blank %}
+          {% form 'product', pca_product, class: 'pca-product-form' %}
+            <input type="hidden" name="id" value="{{ pca_variant.id }}">
+            {% if pca_available %}
+              <button type="submit" class="pca-btn pca-btn--primary pca-purchase__atc">
+                Add To Cart
+              </button>
+            {% else %}
+              <button type="submit" class="pca-btn pca-btn--primary pca-btn--disabled pca-purchase__atc" disabled>
+                Sold Out
+              </button>
+            {% endif %}
+          {% endform %}
+        {% else %}
+          <a class="pca-btn pca-btn--primary pca-purchase__atc" href="{{ section.settings.fallback_url }}">Add To Cart</a>
+        {% endif %}
+        <a class="pca-btn pca-btn--ghost" href="{{ section.settings.fallback_url | default: '#' }}">View Full Details</a>
+      </div>
+
+      <div class="pca-purchase__meta">
+        <span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><rect x=".5" y="3" width="12" height="9" rx=".8" stroke="#c9a84c" stroke-width="1.1"/><path d="M4 3V2a2.5 2.5 0 015 0v1" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round"/></svg>
+          Secure checkout
+        </span>
+        <span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1 7l2.5 3L7 3l3 3 2-4" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          30-day satisfaction promise
+        </span>
+        <span>
+          <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1.5 4.5h10M1.5 4.5L3 2h7l1.5 2.5M1.5 4.5L1 9.5a1 1 0 001 1h9a1 1 0 001-1l-.5-5" stroke="#c9a84c" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Free shipping on orders over {{ section.settings.free_shipping_threshold }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── V4: Why Buy Today ── {%- endcomment -%}
+  <div class="pca-urgency">
+    <div class="pca-urgency__inner">
+      <p class="pca-eyebrow">{{ section.settings.urgency_eyebrow }}</p>
+      <h2>{{ section.settings.urgency_heading }}</h2>
+      <p class="pca-urgency__body">{{ section.settings.urgency_body }}</p>
+      <div class="pca-urgency__items">
+        {% for block in section.blocks %}
+          {% if block.type == 'urgency_item' %}
+            <div class="pca-urgency__item" {{ block.shopify_attributes }}>
+              <span class="pca-urgency__marker">—</span>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if pca_product != blank %}
+        {% form 'product', pca_product, class: 'pca-product-form' %}
+          <input type="hidden" name="id" value="{{ pca_variant.id }}">
+          {% if pca_available %}
+            <button type="submit" class="pca-btn pca-btn--primary">Begin The Ritual</button>
+          {% else %}
+            <button type="submit" class="pca-btn pca-btn--primary pca-btn--disabled" disabled>Sold Out</button>
+          {% endif %}
+        {% endform %}
+      {% else %}
+        <a class="pca-btn pca-btn--primary" href="{{ section.settings.fallback_url }}">Begin The Ritual</a>
+      {% endif %}
+    </div>
+  </div>
+
   {%- comment -%} ── V2: Founder Doctrine ── {%- endcomment -%}
   <div class="pca-founder">
     <div class="pca-founder__inner">
@@ -251,12 +372,20 @@
 {%- comment -%} ── Fix #1: removed aria-hidden — sticky CTA is interactive ── {%- endcomment -%}
 {%- comment -%} ── Fix #2: sold-out state mirrored from hero ── {%- endcomment -%}
 <div class="pca-sticky-cta">
+  <div class="pca-sticky-cta__info">
+    <span class="pca-sticky-cta__name">
+      {%- if pca_product != blank -%}{{ pca_product.title }}{%- else -%}PCA™ Obsidian Hydration Fountain{%- endif -%}
+    </span>
+    {%- if pca_product != blank -%}
+      <span class="pca-sticky-cta__price">{{ pca_variant.price | money }}</span>
+    {%- endif -%}
+  </div>
   {% if pca_product != blank %}
     {% form 'product', pca_product %}
       <input type="hidden" name="id" value="{{ pca_variant.id }}">
       {% if pca_available %}
         <button type="submit" class="pca-btn pca-btn--primary pca-sticky-cta__btn">
-          {{ section.settings.cta_text }}
+          Add To Cart
         </button>
       {% else %}
         <button type="submit" class="pca-btn pca-btn--primary pca-btn--disabled pca-sticky-cta__btn" disabled>
@@ -826,6 +955,188 @@
     letter-spacing: .06em;
   }
 
+  /* ── V4: Product purchase block ── */
+  .pca-purchase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 680px;
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-purchase__media {
+    position: relative;
+    overflow: hidden;
+    background: #0a0a0a;
+  }
+
+  .pca-purchase__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pca-purchase__img-placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    background: radial-gradient(circle at 50% 50%, rgba(201,168,76,.14), transparent 65%);
+  }
+
+  .pca-purchase__content {
+    padding: 72px clamp(28px, 6vw, 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .pca-purchase__title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin: 0;
+    color: #f5f0e8;
+  }
+
+  .pca-purchase__price {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+  }
+
+  .pca-purchase__price--compare {
+    color: #555;
+    font-size: 18px;
+    text-decoration: line-through;
+  }
+
+  .pca-purchase__price--current {
+    color: #f5f0e8;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+  }
+
+  .pca-purchase__badge {
+    background: rgba(201,168,76,.12);
+    border: 1px solid rgba(201,168,76,.3);
+    color: #c9a84c;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+  }
+
+  .pca-purchase__benefits {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pca-purchase__benefits li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #9a9590;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .pca-purchase__benefits svg { flex-shrink: 0; }
+
+  .pca-purchase__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .pca-purchase__atc {
+    padding: 22px 52px;
+    font-size: 14px;
+  }
+
+  .pca-purchase__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 8px;
+    border-top: 1px solid rgba(201,168,76,.12);
+  }
+
+  .pca-purchase__meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #666;
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  /* ── V4: Why Buy Today ── */
+  .pca-urgency {
+    border-bottom: 1px solid rgba(201,168,76,.18);
+    background: radial-gradient(ellipse at 20% 50%, rgba(201,168,76,.06), transparent 55%);
+  }
+
+  .pca-urgency__inner {
+    max-width: 780px;
+    padding: 80px clamp(28px, 7vw, 110px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .pca-urgency__inner h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1;
+    margin: 0;
+  }
+
+  .pca-urgency__body {
+    color: #9a9590;
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .pca-urgency__items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .pca-urgency__item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .pca-urgency__marker {
+    color: #c9a84c;
+    font-size: 18px;
+    line-height: 1.6;
+    flex-shrink: 0;
+  }
+
+  .pca-urgency__item p {
+    color: #9a9590;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
   /* ── Sticky mobile CTA — hidden on desktop ── */
   .pca-sticky-cta {
     display: none;
@@ -906,22 +1217,67 @@
       padding-bottom: 86px;
     }
 
-    /* Fix #2 + Fix #5: show sticky CTA */
+    .pca-purchase {
+      grid-template-columns: 1fr;
+    }
+
+    .pca-purchase__media {
+      min-height: 360px;
+    }
+
+    .pca-purchase__content {
+      gap: 20px;
+    }
+
+    .pca-urgency__inner {
+      padding: 56px 28px;
+    }
+
+    /* Upgraded sticky bar — show on mobile */
     .pca-sticky-cta {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 16px 20px calc(16px + env(safe-area-inset-bottom));
-      background: linear-gradient(to top, #070707 70%, transparent);
+      padding: 14px 20px calc(14px + env(safe-area-inset-bottom));
+      background: #0d0d0d;
+      border-top: 1px solid rgba(201,168,76,.2);
       z-index: 100;
     }
 
+    .pca-sticky-cta__info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: hidden;
+    }
+
+    .pca-sticky-cta__name {
+      color: #f5f0e8;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .pca-sticky-cta__price {
+      color: #c9a84c;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
     .pca-sticky-cta__btn {
-      width: 100%;
-      text-align: center;
-      padding: 18px;
+      flex-shrink: 0;
+      padding: 14px 24px;
+      font-size: 12px;
+      white-space: nowrap;
     }
   }
 </style>
@@ -985,6 +1341,43 @@
       "id": "hero_alt",
       "label": "Hero image alt text",
       "default": "PCA Obsidian Hydration Fountain in a luxury home setting"
+    },
+    {
+      "type": "header",
+      "content": "Product Purchase Block"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image",
+      "label": "Product image (overrides product featured image)"
+    },
+    {
+      "type": "text",
+      "id": "free_shipping_threshold",
+      "label": "Free shipping threshold",
+      "default": "$75"
+    },
+    {
+      "type": "header",
+      "content": "Why Buy Today"
+    },
+    {
+      "type": "text",
+      "id": "urgency_eyebrow",
+      "label": "Eyebrow",
+      "default": "Why Now"
+    },
+    {
+      "type": "text",
+      "id": "urgency_heading",
+      "label": "Heading",
+      "default": "Founder launch pricing."
+    },
+    {
+      "type": "textarea",
+      "id": "urgency_body",
+      "label": "Body",
+      "default": "Obsidian is in its founding chapter. The price you see today reflects that. Once the first production run sells through, this changes."
     },
     {
       "type": "header",
@@ -1134,9 +1527,28 @@
       "default": "Join The Alley"
     }
   ],
+  "blocks": [
+    {
+      "type": "urgency_item",
+      "name": "Why Buy Today — item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Item",
+          "default": "Founder launch pricing — first production run only"
+        }
+      ]
+    }
+  ],
   "presets": [
     {
-      "name": "PCA Obsidian Landing"
+      "name": "PCA Obsidian Landing",
+      "blocks": [
+        { "type": "urgency_item", "settings": { "text": "Founder launch pricing — first production run only" } },
+        { "type": "urgency_item", "settings": { "text": "Free shipping included at launch" } },
+        { "type": "urgency_item", "settings": { "text": "30-day satisfaction promise, no questions" } }
+      ]
     }
   ]
 }
