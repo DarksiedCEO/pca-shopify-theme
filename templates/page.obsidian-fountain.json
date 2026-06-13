@@ -1,0 +1,31 @@
+{
+  "sections": {
+    "pca_obsidian_landing": {
+      "type": "pca-obsidian-landing",
+      "settings": {
+        "eyebrow": "PCA™ Hydration Ritual",
+        "heading": "Water, elevated.",
+        "subheading": "The PCA™ Obsidian Hydration Fountain turns daily water into a luxury feline wellness ritual for cats who live beautifully.",
+        "cta_text": "Begin The Ritual",
+        "learn_more_text": "Learn More",
+        "hero_alt": "PCA Obsidian Hydration Fountain in a luxury home setting",
+        "founder_quote": "<p>PCA was built for one reason: Sphynx cats deserve the same level of thoughtful design that their owners give to the rest of their home. Obsidian is the beginning of that standard.<\/p>",
+        "founder_name": "Andre",
+        "founder_title": "Founder, PCA™",
+        "guarantee_heading": "Satisfaction Promise",
+        "guarantee_body": "If Obsidian does not meet your expectations, contact us within 30 days. We will make it right.",
+        "support_heading": "Responsive Support",
+        "support_body": "Questions before or after your purchase? We respond within 24 hours. Real answers, not scripts.",
+        "contact_heading": "Direct Contact",
+        "contact_body": "Reach the team directly. No tickets, no bots.",
+        "email_heading": "The ritual starts here.",
+        "email_subheading": "Early access, care guides, and the PCA perspective on feline wellness. For cats who live beautifully.",
+        "email_placeholder": "Your email address",
+        "email_cta": "Join The Alley"
+      }
+    }
+  },
+  "order": [
+    "pca_obsidian_landing"
+  ]
+}
