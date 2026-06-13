@@ -1,0 +1,1121 @@
+{% comment %}
+  PCA™ Obsidian Landing Section
+  Path: sections/pca-obsidian-landing.liquid
+  Purpose: Luxury conversion landing block for PCA Obsidian Hydration Fountain.
+  Trust rule: No fake reviews, no medical claims, no unsupported stats.
+  Note: Add Google Fonts <link> tags to theme.liquid <head> for Cormorant Garamond + DM Sans.
+{% endcomment %}
+
+<section class="pca-obsidian" data-section-id="{{ section.id }}">
+
+  {%- comment -%} ── HERO ── {%- endcomment -%}
+  <div class="pca-hero">
+    <div class="pca-hero__media">
+      {% if section.settings.hero_image != blank %}
+        {{ section.settings.hero_image | image_url: width: 1800 | image_tag: loading: 'eager', class: 'pca-hero__image', alt: section.settings.hero_alt }}
+      {% else %}
+        <div class="pca-hero__placeholder"></div>
+      {% endif %}
+    </div>
+
+    <div class="pca-hero__content">
+      <p class="pca-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h1>{{ section.settings.heading }}</h1>
+      <p class="pca-hero__sub">{{ section.settings.subheading }}</p>
+
+      <div class="pca-hero__ctas">
+        {% if section.settings.product != blank %}
+          {% assign pca_product = section.settings.product %}
+          {% form 'product', pca_product, class: 'pca-product-form' %}
+            <input type="hidden" name="id" value="{{ pca_product.selected_or_first_available_variant.id }}">
+            <button type="submit" class="pca-btn pca-btn--primary">
+              {{ section.settings.cta_text }}
+            </button>
+          {% endform %}
+        {% else %}
+          <a class="pca-btn pca-btn--primary" href="{{ section.settings.fallback_url }}">{{ section.settings.cta_text }}</a>
+        {% endif %}
+        {% if section.settings.learn_more_url != blank %}
+          <a class="pca-btn pca-btn--ghost" href="{{ section.settings.learn_more_url }}">{{ section.settings.learn_more_text }}</a>
+        {% endif %}
+      </div>
+
+      {%- comment -%} ── UPGRADE #3: Trust row with inline SVG icons ── {%- endcomment -%}
+      <ul class="pca-trust-row">
+        <li>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1L8.8 5.1H13.1L9.6 7.8L10.9 12L7 9.5L3.1 12L4.4 7.8L0.9 5.1H5.2L7 1Z" fill="#c9a84c"/></svg>
+          Secure Checkout
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#c9a84c" stroke-width="1.2"/><path d="M4.5 7L6.5 9L9.5 5" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Premium Feline Wellness
+        </li>
+        <li>
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><rect x="1" y="4" width="12" height="8" rx="1" stroke="#c9a84c" stroke-width="1.2"/><path d="M4 4V3a3 3 0 016 0v1" stroke="#c9a84c" stroke-width="1.2" stroke-linecap="round"/></svg>
+          Luxury Design
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  {%- comment -%} ── V2: Hydration Education Block ── {%- endcomment -%}
+  <div class="pca-education">
+    <div class="pca-education__media">
+      {% if section.settings.edu_image != blank %}
+        {{ section.settings.edu_image | image_url: width: 1400 | image_tag: loading: 'lazy', class: 'pca-education__img', alt: 'Cat drinking from moving water' }}
+      {% else %}
+        <div class="pca-education__placeholder"></div>
+      {% endif %}
+    </div>
+    <div class="pca-education__content">
+      <p class="pca-eyebrow">The Science of Thirst</p>
+      <h2>Still water was never the goal.</h2>
+      <p>Cats are naturally drawn toward moving water. In the wild, still water signals stagnation. A flowing source signals freshness. The Obsidian Hydration Fountain works with that instinct — transforming daily hydration into a visible ritual designed for modern feline households.</p>
+      <p>This is not a medical claim. It is an observation that has shaped how we designed every surface, every flow rate, and every finish of the Obsidian system.</p>
+    </div>
+  </div>
+
+  {%- comment -%} ── V2: Lifestyle Block ── {%- endcomment -%}
+  <div class="pca-lifestyle">
+    <div class="pca-lifestyle__header">
+      <p class="pca-eyebrow">The Environment</p>
+      <h2>Designed for beautiful homes.</h2>
+      <p class="pca-lifestyle__intro">Most pet products are designed to be hidden. Obsidian is designed to be seen.</p>
+    </div>
+    <div class="pca-lifestyle__grid">
+      {% assign lifestyle_images = 'lifestyle_image_1,lifestyle_image_2,lifestyle_image_3' | split: ',' %}
+      {% for img_id in lifestyle_images %}
+        {% assign img = section.settings[img_id] %}
+        <div class="pca-lifestyle__cell{% if forloop.first %} pca-lifestyle__cell--large{% endif %}">
+          {% if img != blank %}
+            {{ img | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'pca-lifestyle__img', alt: 'PCA Obsidian in a luxury home' }}
+          {% else %}
+            <div class="pca-lifestyle__img-placeholder"></div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  {%- comment -%} ── V2: Founder Doctrine ── {%- endcomment -%}
+  <div class="pca-founder">
+    <div class="pca-founder__inner">
+      <p class="pca-eyebrow">Why PCA Exists</p>
+      <blockquote class="pca-founder__quote">
+        {{ section.settings.founder_quote }}
+      </blockquote>
+      <div class="pca-founder__attribution">
+        {% if section.settings.founder_image != blank %}
+          {{ section.settings.founder_image | image_url: width: 160 | image_tag: loading: 'lazy', class: 'pca-founder__portrait', alt: section.settings.founder_name }}
+        {% endif %}
+        <div>
+          <p class="pca-founder__name">{{ section.settings.founder_name }}</p>
+          <p class="pca-founder__title">{{ section.settings.founder_title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── V2: Risk Reversal / Guarantee ── {%- endcomment -%}
+  <div class="pca-guarantee">
+    <div class="pca-guarantee__grid">
+      <div class="pca-guarantee__item">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M16 3L4 8v9c0 6.6 5.1 12.8 12 14.3C22.9 29.8 28 23.6 28 17V8L16 3z" stroke="#c9a84c" stroke-width="1.4" stroke-linejoin="round"/><path d="M11 16l3.5 3.5L21 13" stroke="#c9a84c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>{{ section.settings.guarantee_heading }}</h3>
+        <p>{{ section.settings.guarantee_body }}</p>
+      </div>
+      <div class="pca-guarantee__item">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="#c9a84c" stroke-width="1.4"/><path d="M16 10v6l4 4" stroke="#c9a84c" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>{{ section.settings.support_heading }}</h3>
+        <p>{{ section.settings.support_body }}</p>
+      </div>
+      <div class="pca-guarantee__item">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M28 20.7c0 .4-.1.8-.3 1.2-.2.4-.4.7-.7 1-.5.5-1 .8-1.6.8-.4 0-.9-.1-1.4-.4-1.5-.8-2.9-1.8-4.2-3.1-1.2-1.2-2.2-2.6-3-4-.8-1.5-1.2-2.9-1.2-4.2 0-.4.1-.8.3-1.2.2-.4.4-.7.7-1C17 9.3 17.6 9 18.2 9c.2 0 .4 0 .6.1.2.1.4.2.5.5l1.8 2.5c.2.2.3.5.3.7 0 .3-.1.5-.2.7l-.8 1.1c0 .1-.1.1-.1.2 0 .1.1.3.2.4.5.8 1 1.5 1.7 2.1.7.7 1.4 1.3 2.2 1.7.1.1.3.1.4.1.1 0 .2 0 .3-.1l1.1-.8c.2-.2.5-.2.8-.2.3 0 .5.1.7.2l2.5 1.8c.3.2.4.4.4.6z" stroke="#c9a84c" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        <h3>{{ section.settings.contact_heading }}</h3>
+        <p>{{ section.settings.contact_body }}</p>
+        {% if section.settings.contact_email != blank %}
+          <a class="pca-guarantee__link" href="mailto:{{ section.settings.contact_email }}">{{ section.settings.contact_email }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} ── UPGRADE #4: Feature grid with optional card images ── {%- endcomment -%}
+  <div class="pca-grid">
+    <article>
+      {% if section.settings.card_image_1 != blank %}
+        <div class="pca-grid__img-wrap">
+          {{ section.settings.card_image_1 | image_url: width: 800 | image_tag: loading: 'lazy', class: 'pca-grid__img', alt: 'Moving water feels natural' }}
+        </div>
+      {% endif %}
+      <span>01</span>
+      <h2>Moving water feels natural.</h2>
+      <p>Cats are often drawn to flowing water. Obsidian turns hydration into a visible daily ritual.</p>
+    </article>
+
+    <article>
+      {% if section.settings.card_image_2 != blank %}
+        <div class="pca-grid__img-wrap">
+          {{ section.settings.card_image_2 | image_url: width: 800 | image_tag: loading: 'lazy', class: 'pca-grid__img', alt: 'Built for modern interiors' }}
+        </div>
+      {% endif %}
+      <span>02</span>
+      <h2>Built for modern interiors.</h2>
+      <p>A fountain should not look like clutter. Obsidian is positioned as decor, not an appliance.</p>
+    </article>
+
+    <article>
+      {% if section.settings.card_image_3 != blank %}
+        <div class="pca-grid__img-wrap">
+          {{ section.settings.card_image_3 | image_url: width: 800 | image_tag: loading: 'lazy', class: 'pca-grid__img', alt: 'Cleaner drinking surface' }}
+        </div>
+      {% endif %}
+      <span>03</span>
+      <h2>Cleaner drinking surface.</h2>
+      <p>The stainless steel drinking tray supports a cleaner-feeling hydration experience.</p>
+    </article>
+  </div>
+
+  <div class="pca-comparison">
+    <div>
+      <p class="pca-eyebrow">Why Obsidian</p>
+      <h2>Not another generic pet fountain.</h2>
+    </div>
+
+    <div class="pca-table">
+      <div class="pca-table__header"><strong>PCA Obsidian</strong><strong>Typical Fountain</strong></div>
+      <div><span>Luxury visual system</span><span>Generic product listing</span></div>
+      <div><span>Designed for display</span><span>Usually hidden away</span></div>
+      <div><span>Ritual-based positioning</span><span>Feature-only selling</span></div>
+      <div><span>PCA brand experience</span><span>Commodity presentation</span></div>
+    </div>
+  </div>
+
+  <div class="pca-faq">
+    <h2>Questions before the ritual begins?</h2>
+
+    <details>
+      <summary>Is this only for Sphynx cats?</summary>
+      <p>No. PCA is Sphynx-first, but Obsidian is for any cat household that wants a more elevated hydration experience.</p>
+    </details>
+
+    <details>
+      <summary>Does this replace veterinary care?</summary>
+      <p>No. This is a hydration accessory, not a medical device. Always speak with your veterinarian about health concerns.</p>
+    </details>
+
+    <details>
+      <summary>Why buy from PCA instead of a generic listing?</summary>
+      <p>You are buying the product plus the PCA experience: better presentation, stronger education, cleaner branding, and a luxury feline care ecosystem.</p>
+    </details>
+  </div>
+
+  {%- comment -%} ── UPGRADE #5: Email capture — Join The Alley ── {%- endcomment -%}
+  <div class="pca-alley">
+    <p class="pca-eyebrow">Join The Alley</p>
+    <h2>{{ section.settings.email_heading }}</h2>
+    <p class="pca-alley__sub">{{ section.settings.email_subheading }}</p>
+    {% form 'customer', class: 'pca-alley__form' %}
+      <input type="hidden" name="contact[tags]" value="newsletter,pca-alley">
+      <div class="pca-alley__row">
+        <input
+          type="email"
+          name="contact[email]"
+          class="pca-alley__input"
+          placeholder="{{ section.settings.email_placeholder }}"
+          required
+          autocomplete="email"
+        >
+        <button type="submit" class="pca-btn pca-btn--primary">{{ section.settings.email_cta }}</button>
+      </div>
+      {% if form.posted_successfully? %}
+        <p class="pca-alley__success">You're in. Welcome to the alley.</p>
+      {% endif %}
+      {% if form.errors %}
+        <p class="pca-alley__error">{{ form.errors | default_errors }}</p>
+      {% endif %}
+    {% endform %}
+    <p class="pca-alley__disclaimer">No spam. No noise. Just PCA.</p>
+  </div>
+
+</section>
+
+{%- comment -%} ── UPGRADE #2: Sticky mobile CTA ── {%- endcomment -%}
+<div class="pca-sticky-cta" aria-hidden="true">
+  {% if section.settings.product != blank %}
+    {% assign pca_product = section.settings.product %}
+    {% form 'product', pca_product %}
+      <input type="hidden" name="id" value="{{ pca_product.selected_or_first_available_variant.id }}">
+      <button type="submit" class="pca-btn pca-btn--primary pca-sticky-cta__btn">
+        {{ section.settings.cta_text }}
+      </button>
+    {% endform %}
+  {% else %}
+    <a class="pca-btn pca-btn--primary pca-sticky-cta__btn" href="{{ section.settings.fallback_url }}">{{ section.settings.cta_text }}</a>
+  {% endif %}
+</div>
+
+<style>
+  .pca-obsidian {
+    background: #070707;
+    color: #f5f0e8;
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+
+  /* ── Hero ── */
+  .pca-hero {
+    min-height: 92vh;
+    display: grid;
+    grid-template-columns: 1.05fr .95fr;
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-hero__media {
+    position: relative;
+    min-height: 720px;
+    background: radial-gradient(circle at center, #1d1710, #070707 68%);
+    overflow: hidden;
+  }
+
+  .pca-hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: .92;
+  }
+
+  .pca-hero__placeholder {
+    width: 100%;
+    height: 100%;
+    background:
+      linear-gradient(to bottom, transparent 20%, rgba(0,0,0,.7)),
+      radial-gradient(circle at center, rgba(201,168,76,.18), transparent 55%);
+  }
+
+  .pca-hero__content {
+    padding: 80px clamp(28px, 6vw, 96px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .pca-eyebrow {
+    color: #c9a84c;
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
+
+  .pca-hero h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(58px, 8vw, 116px);
+    font-weight: 300;
+    line-height: .92;
+    letter-spacing: -.04em;
+    margin: 0 0 32px;
+  }
+
+  .pca-hero__sub {
+    color: #aaa29a;
+    font-size: 20px;
+    line-height: 1.7;
+    max-width: 620px;
+    margin-bottom: 38px;
+  }
+
+  /* ── Upgrade #1: dual CTA row ── */
+  .pca-hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .pca-product-form {
+    display: contents;
+  }
+
+  .pca-btn {
+    display: inline-block;
+    width: fit-content;
+    padding: 20px 42px;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+    transition: background .2s, color .2s, border-color .2s;
+    border: 1px solid #c9a84c;
+    font-family: inherit;
+  }
+
+  .pca-btn--primary {
+    background: #c9a84c;
+    color: #070707;
+  }
+
+  .pca-btn--primary:hover {
+    background: transparent;
+    color: #c9a84c;
+  }
+
+  .pca-btn--ghost {
+    background: transparent;
+    color: #c9a84c;
+  }
+
+  .pca-btn--ghost:hover {
+    background: rgba(201,168,76,.08);
+  }
+
+  /* ── Upgrade #3: trust row ── */
+  .pca-trust-row {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .pca-trust-row li {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #777;
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+  }
+
+  /* ── V2: Education block ── */
+  .pca-education {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 640px;
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-education__media {
+    position: relative;
+    overflow: hidden;
+    background: #0e0e0e;
+  }
+
+  .pca-education__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: .88;
+  }
+
+  .pca-education__placeholder {
+    width: 100%;
+    height: 100%;
+    min-height: 480px;
+    background: radial-gradient(circle at 40% 60%, rgba(201,168,76,.12), transparent 60%);
+  }
+
+  .pca-education__content {
+    padding: 80px clamp(28px, 6vw, 96px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .pca-education__content h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.02em;
+    margin: 0;
+  }
+
+  .pca-education__content p {
+    color: #9a9590;
+    font-size: 17px;
+    line-height: 1.75;
+    max-width: 540px;
+    margin: 0;
+  }
+
+  /* ── V2: Lifestyle block ── */
+  .pca-lifestyle {
+    border-bottom: 1px solid rgba(201,168,76,.18);
+    padding: 80px clamp(28px, 7vw, 110px);
+  }
+
+  .pca-lifestyle__header {
+    max-width: 640px;
+    margin-bottom: 56px;
+  }
+
+  .pca-lifestyle__intro {
+    color: #9a9590;
+    font-size: 18px;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .pca-lifestyle__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 2px;
+  }
+
+  .pca-lifestyle__cell {
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: #111;
+  }
+
+  .pca-lifestyle__cell--large {
+    grid-row: span 1;
+    aspect-ratio: 3/5;
+  }
+
+  .pca-lifestyle__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+  }
+
+  .pca-lifestyle__cell:hover .pca-lifestyle__img {
+    transform: scale(1.04);
+  }
+
+  .pca-lifestyle__img-placeholder {
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(201,168,76,.08), transparent 60%);
+  }
+
+  /* ── V2: Founder doctrine ── */
+  .pca-founder {
+    padding: 100px clamp(28px, 7vw, 110px);
+    border-bottom: 1px solid rgba(201,168,76,.18);
+    background: radial-gradient(ellipse at 80% 50%, rgba(201,168,76,.04), transparent 60%);
+  }
+
+  .pca-founder__inner {
+    max-width: 760px;
+  }
+
+  .pca-founder__quote {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    color: #f5f0e8;
+    margin: 0 0 48px;
+    padding: 0;
+    border: none;
+  }
+
+  .pca-founder__attribution {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .pca-founder__portrait {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(201,168,76,.3);
+  }
+
+  .pca-founder__name {
+    color: #f5f0e8;
+    font-weight: 700;
+    font-size: 14px;
+    margin: 0 0 4px;
+  }
+
+  .pca-founder__title {
+    color: #777;
+    font-size: 13px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  /* ── V2: Guarantee / risk reversal ── */
+  .pca-guarantee {
+    padding: 80px clamp(28px, 7vw, 110px);
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-guarantee__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .pca-guarantee__item {
+    padding: 48px 40px;
+    border: 1px solid rgba(201,168,76,.14);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .pca-guarantee__item h3 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: #f5f0e8;
+    margin: 0;
+  }
+
+  .pca-guarantee__item p {
+    color: #9a9590;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+    flex: 1;
+  }
+
+  .pca-guarantee__link {
+    color: #c9a84c;
+    font-size: 14px;
+    text-decoration: none;
+    letter-spacing: .06em;
+    border-bottom: 1px solid rgba(201,168,76,.3);
+    width: fit-content;
+    transition: border-color .2s;
+  }
+
+  .pca-guarantee__link:hover {
+    border-color: #c9a84c;
+  }
+
+  /* ── Feature grid ── */
+  .pca-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-grid article {
+    padding: 56px;
+    border-right: 1px solid rgba(201,168,76,.14);
+  }
+
+  .pca-grid article:last-child {
+    border-right: none;
+  }
+
+  /* ── Upgrade #4: card images ── */
+  .pca-grid__img-wrap {
+    margin: -56px -56px 40px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+
+  .pca-grid__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s ease;
+  }
+
+  .pca-grid article:hover .pca-grid__img {
+    transform: scale(1.03);
+  }
+
+  .pca-grid span {
+    color: #c9a84c;
+    letter-spacing: .18em;
+    font-size: 12px;
+    font-weight: 800;
+  }
+
+  .pca-grid h2,
+  .pca-comparison h2,
+  .pca-faq h2,
+  .pca-alley h2 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1;
+    margin: 18px 0;
+  }
+
+  .pca-grid p,
+  .pca-faq p {
+    color: #9a9590;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── Comparison ── */
+  .pca-comparison {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 56px;
+    padding: 80px clamp(28px, 7vw, 110px);
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-table {
+    border: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-table > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-bottom: 1px solid rgba(201,168,76,.14);
+  }
+
+  .pca-table > div:last-child {
+    border-bottom: none;
+  }
+
+  .pca-table__header {
+    background: rgba(201,168,76,.06);
+  }
+
+  .pca-table strong,
+  .pca-table span {
+    padding: 22px;
+    color: #f5f0e8;
+  }
+
+  .pca-table span:nth-child(2),
+  .pca-table strong:nth-child(2) {
+    color: #8a8580;
+    border-left: 1px solid rgba(201,168,76,.14);
+  }
+
+  /* ── FAQ ── */
+  .pca-faq {
+    padding: 80px clamp(28px, 7vw, 110px);
+    max-width: 1000px;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-faq details {
+    border-top: 1px solid rgba(201,168,76,.18);
+    padding: 24px 0;
+  }
+
+  .pca-faq details:last-child {
+    border-bottom: 1px solid rgba(201,168,76,.18);
+  }
+
+  .pca-faq summary {
+    cursor: pointer;
+    font-size: 20px;
+    color: #f5f0e8;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: color .2s;
+  }
+
+  .pca-faq summary::-webkit-details-marker { display: none; }
+
+  .pca-faq summary::after {
+    content: '+';
+    font-size: 22px;
+    font-weight: 300;
+    color: #c9a84c;
+    transition: transform .2s;
+    flex-shrink: 0;
+    margin-left: 16px;
+  }
+
+  .pca-faq details[open] summary { color: #c9a84c; }
+  .pca-faq details[open] summary::after { transform: rotate(45deg); }
+  .pca-faq details p { margin-top: 16px; }
+
+  /* ── Upgrade #5: Email capture ── */
+  .pca-alley {
+    padding: 100px clamp(28px, 7vw, 110px);
+    text-align: center;
+    border-bottom: 1px solid rgba(201,168,76,.18);
+    background: radial-gradient(ellipse at center, rgba(201,168,76,.05) 0%, transparent 70%);
+  }
+
+  .pca-alley__sub {
+    color: #9a9590;
+    font-size: 18px;
+    max-width: 560px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+
+  .pca-alley__row {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .pca-alley__input {
+    flex: 1;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(201,168,76,.3);
+    border-right: none;
+    color: #f5f0e8;
+    padding: 20px 24px;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+    transition: border-color .2s;
+  }
+
+  .pca-alley__input::placeholder { color: #555; }
+  .pca-alley__input:focus { border-color: #c9a84c; }
+
+  .pca-alley__row .pca-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
+  .pca-alley__success {
+    color: #c9a84c;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  .pca-alley__error {
+    color: #e07070;
+    font-size: 14px;
+    margin-top: 16px;
+  }
+
+  .pca-alley__disclaimer {
+    color: #444;
+    font-size: 12px;
+    margin-top: 16px;
+    letter-spacing: .06em;
+  }
+
+  /* ── Upgrade #2: Sticky mobile CTA ── */
+  .pca-sticky-cta {
+    display: none;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .pca-hero,
+    .pca-grid,
+    .pca-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .pca-hero__media {
+      min-height: 460px;
+    }
+
+    .pca-grid article {
+      border-right: none;
+      border-bottom: 1px solid rgba(201,168,76,.14);
+      padding: 38px 28px;
+    }
+
+    .pca-grid__img-wrap {
+      margin: -38px -28px 32px;
+    }
+
+    .pca-education {
+      grid-template-columns: 1fr;
+    }
+
+    .pca-education__media {
+      min-height: 380px;
+    }
+
+    .pca-lifestyle__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pca-lifestyle__cell--large {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+
+    .pca-guarantee__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .pca-guarantee__item {
+      padding: 36px 28px;
+    }
+
+    .pca-comparison,
+    .pca-faq,
+    .pca-alley,
+    .pca-lifestyle,
+    .pca-founder,
+    .pca-guarantee {
+      padding: 56px 28px;
+    }
+
+    .pca-alley__row {
+      flex-direction: column;
+    }
+
+    .pca-alley__input {
+      border-right: 1px solid rgba(201,168,76,.3);
+      border-bottom: none;
+    }
+
+    .pca-alley__row .pca-btn {
+      width: 100%;
+      text-align: center;
+    }
+
+    /* Show sticky CTA on mobile */
+    .pca-sticky-cta {
+      display: block;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 16px 20px;
+      background: linear-gradient(to top, #070707 70%, transparent);
+      z-index: 100;
+    }
+
+    .pca-sticky-cta__btn {
+      width: 100%;
+      text-align: center;
+      padding: 18px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "PCA Obsidian Landing",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "PCA™ Hydration Ritual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Water, elevated."
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "The PCA™ Obsidian Hydration Fountain turns daily water into a luxury feline wellness ritual for cats who live beautifully."
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Connected product"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Primary CTA text",
+      "default": "Begin The Ritual"
+    },
+    {
+      "type": "url",
+      "id": "fallback_url",
+      "label": "Fallback CTA URL"
+    },
+    {
+      "type": "url",
+      "id": "learn_more_url",
+      "label": "Learn More URL"
+    },
+    {
+      "type": "text",
+      "id": "learn_more_text",
+      "label": "Learn More CTA text",
+      "default": "Learn More"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_alt",
+      "label": "Hero image alt text",
+      "default": "PCA Obsidian Hydration Fountain in a luxury home setting"
+    },
+    {
+      "type": "header",
+      "content": "Education Block"
+    },
+    {
+      "type": "image_picker",
+      "id": "edu_image",
+      "label": "Education image"
+    },
+    {
+      "type": "header",
+      "content": "Lifestyle Block"
+    },
+    {
+      "type": "image_picker",
+      "id": "lifestyle_image_1",
+      "label": "Lifestyle image 1 (large)"
+    },
+    {
+      "type": "image_picker",
+      "id": "lifestyle_image_2",
+      "label": "Lifestyle image 2"
+    },
+    {
+      "type": "image_picker",
+      "id": "lifestyle_image_3",
+      "label": "Lifestyle image 3"
+    },
+    {
+      "type": "header",
+      "content": "Founder"
+    },
+    {
+      "type": "richtext",
+      "id": "founder_quote",
+      "label": "Founder quote",
+      "default": "<p>PCA was built for one reason: Sphynx cats deserve the same level of thoughtful design that their owners give to the rest of their home. Obsidian is the beginning of that standard.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "founder_image",
+      "label": "Founder portrait"
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Founder name",
+      "default": "Andre"
+    },
+    {
+      "type": "text",
+      "id": "founder_title",
+      "label": "Founder title",
+      "default": "Founder, PCA™"
+    },
+    {
+      "type": "header",
+      "content": "Guarantee"
+    },
+    {
+      "type": "text",
+      "id": "guarantee_heading",
+      "label": "Guarantee heading",
+      "default": "Satisfaction Promise"
+    },
+    {
+      "type": "textarea",
+      "id": "guarantee_body",
+      "label": "Guarantee body",
+      "default": "If Obsidian does not meet your expectations, contact us within 30 days. We will make it right."
+    },
+    {
+      "type": "text",
+      "id": "support_heading",
+      "label": "Support heading",
+      "default": "Responsive Support"
+    },
+    {
+      "type": "textarea",
+      "id": "support_body",
+      "label": "Support body",
+      "default": "Questions before or after your purchase? We respond within 24 hours. Real answers, not scripts."
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Contact heading",
+      "default": "Direct Contact"
+    },
+    {
+      "type": "textarea",
+      "id": "contact_body",
+      "label": "Contact body",
+      "default": "Reach the team directly. No tickets, no bots."
+    },
+    {
+      "type": "text",
+      "id": "contact_email",
+      "label": "Contact email"
+    },
+    {
+      "type": "header",
+      "content": "Feature Card Images"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image_1",
+      "label": "Card 01 — Moving Water"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image_2",
+      "label": "Card 02 — Modern Interiors"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_image_3",
+      "label": "Card 03 — Stainless Steel"
+    },
+    {
+      "type": "header",
+      "content": "Email Capture"
+    },
+    {
+      "type": "text",
+      "id": "email_heading",
+      "label": "Heading",
+      "default": "The ritual starts here."
+    },
+    {
+      "type": "text",
+      "id": "email_subheading",
+      "label": "Subheading",
+      "default": "Early access, care guides, and the PCA perspective on feline wellness. For cats who live beautifully."
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Input placeholder",
+      "default": "Your email address"
+    },
+    {
+      "type": "text",
+      "id": "email_cta",
+      "label": "Submit button text",
+      "default": "Join The Alley"
+    }
+  ],
+  "presets": [
+    {
+      "name": "PCA Obsidian Landing"
+    }
+  ]
+}
+{% endschema %}
