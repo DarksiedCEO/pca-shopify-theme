@@ -32,12 +32,10 @@
         "product-1": { "type": "product", "settings": { "product": "rare-skin-turtleneck", "name_fallback": "Rare Skin Turtleneck™", "descriptor": "Soft polar fleece, cut close for warmth without weight.", "price_fallback": "$29.99" } },
         "product-2": { "type": "product", "settings": { "product": "alley-scholar-collection", "name_fallback": "Alley Scholar Collection™", "descriptor": "British-tailored statement pieces — every piece sold separately.", "price_fallback": "From $39.99" } },
         "product-3": { "type": "product", "settings": { "product": "rare-skin-lounge-hoodie", "name_fallback": "Rare Skin Lounge Hoodie™", "descriptor": "Heavier weight for lounging season.", "price_fallback": "$32.99" } },
-        "product-4": { "type": "product", "settings": { "name_fallback": "Rare One Winter Vest™", "descriptor": "Their coldest-month armor.", "price_fallback": "From $39.99" } },
         "product-5": { "type": "product", "settings": { "product": "alley-stripe-summer-suit", "name_fallback": "Alley Stripe Summer Suit™", "descriptor": "Fine-stripe, lightweight, unmistakably tailored.", "price_fallback": "$24.99" } },
         "product-6": { "type": "product", "settings": { "product": "rare-skin-bath-bonnet", "name_fallback": "Rare Skin Bath Bonnet™", "descriptor": "Ear protection for bath day, in five colors.", "price_fallback": "$14.99" } },
         "style-1": { "type": "style_guide_item", "settings": { "use_case": "Best for everyday warmth", "recommended_product": "Rare Skin Turtleneck™" } },
         "style-2": { "type": "style_guide_item", "settings": { "use_case": "Best for lounging", "recommended_product": "Rare Skin Lounge Hoodie™" } },
-        "style-3": { "type": "style_guide_item", "settings": { "use_case": "Best for winter", "recommended_product": "Rare One Winter Vest™" } },
         "style-4": { "type": "style_guide_item", "settings": { "use_case": "Best for summer", "recommended_product": "Alley Stripe Summer Suit™" } },
         "style-5": { "type": "style_guide_item", "settings": { "use_case": "Best statement piece", "recommended_product": "Alley Scholar Collection™" } },
         "style-6": { "type": "style_guide_item", "settings": { "use_case": "Best bath-care add-on", "recommended_product": "Rare Skin Bath Bonnet™" } },
@@ -47,8 +45,8 @@
       },
       "block_order": [
         "trust-1", "trust-2", "trust-3", "trust-4",
-        "product-1", "product-2", "product-3", "product-4", "product-5", "product-6",
-        "style-1", "style-2", "style-3", "style-4", "style-5", "style-6",
+        "product-1", "product-2", "product-3", "product-5", "product-6",
+        "style-1", "style-2", "style-4", "style-5", "style-6",
         "promise-1", "promise-2", "promise-3"
       ]
     }

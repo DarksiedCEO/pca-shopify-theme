@@ -126,6 +126,8 @@
     <div class="pcaw-addon__media">
       {%- if section.settings.addon_image != blank -%}
         {{ section.settings.addon_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'pcaw-addon__img' }}
+      {%- elsif section.settings.addon_product != blank and section.settings.addon_product.featured_image != blank -%}
+        {{ section.settings.addon_product.featured_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'pcaw-addon__img', alt: section.settings.addon_product.title }}
       {%- else -%}
         <div class="pcaw-addon__placeholder"></div>
       {%- endif -%}
