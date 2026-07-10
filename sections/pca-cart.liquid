@@ -1,0 +1,372 @@
+{% comment %}
+  PCA™ Cart Page
+  Path: sections/pca-cart.liquid
+  Luxury cart — obsidian/ivory/gold. Free-shipping progress, Bath Bonnet add-on prompt,
+  honest discount messaging (automatic tiers apply at checkout). No fake urgency.
+{% endcomment %}
+
+{%- assign threshold = section.settings.free_shipping_threshold_cents | default: 6500 -%}
+{%- assign addon = section.settings.addon_product -%}
+{%- assign addon_in_cart = false -%}
+{%- if addon != blank -%}
+  {%- for item in cart.items -%}
+    {%- if item.product.id == addon.id -%}{%- assign addon_in_cart = true -%}{%- endif -%}
+  {%- endfor -%}
+{%- endif -%}
+
+<nav class="pcak-topbar">
+  <a class="pcak-topbar__brand" href="{{ routes.root_url }}">PUSSYCAT ALLEY™</a>
+  <div class="pcak-topbar__links">
+    <a href="{{ section.settings.collection_url | default: routes.all_products_collection_url }}">Continue Shopping</a>
+  </div>
+</nav>
+
+<section class="pcak" data-section-id="{{ section.id }}">
+  <h1 class="pcak__title">Your Cart</h1>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="pcak__empty">
+      <p>Their wardrobe is still empty.</p>
+      <a class="pcak-btn pcak-btn--primary" href="{{ section.settings.collection_url | default: routes.all_products_collection_url }}">Shop The Rare Ones Wardrobe</a>
+    </div>
+  {%- else -%}
+
+    {%- comment -%} Free shipping progress {%- endcomment -%}
+    <div class="pcak__shipbar">
+      {%- if cart.total_price >= threshold -%}
+        <p class="pcak__shipbar-msg pcak__shipbar-msg--met">Free shipping unlocked.</p>
+      {%- else -%}
+        {%- assign remaining = threshold | minus: cart.total_price -%}
+        <p class="pcak__shipbar-msg">You're {{ remaining | money }} away from free shipping.</p>
+      {%- endif -%}
+      {%- assign pct = cart.total_price | times: 100 | divided_by: threshold | at_most: 100 -%}
+      <div class="pcak__shipbar-track"><div class="pcak__shipbar-fill" style="width: {{ pct }}%"></div></div>
+    </div>
+
+    <form action="{{ routes.cart_url }}" method="post" class="pcak__form">
+      <div class="pcak__items">
+        {%- for item in cart.items -%}
+          <div class="pcak__item">
+            <a class="pcak__item-media" href="{{ item.url }}">
+              {%- if item.image -%}
+                {{ item.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: item.title }}
+              {%- endif -%}
+            </a>
+            <div class="pcak__item-info">
+              <a class="pcak__item-name" href="{{ item.url }}">{{ item.product.title }}</a>
+              {%- unless item.product.has_only_default_variant -%}
+                <p class="pcak__item-variant">{{ item.variant.title }}</p>
+              {%- endunless -%}
+              <p class="pcak__item-price">
+                {%- if item.original_line_price > item.final_line_price -%}
+                  <s>{{ item.original_line_price | money }}</s>
+                {%- endif -%}
+                {{ item.final_line_price | money }}
+              </p>
+            </div>
+            <div class="pcak__item-controls">
+              <div class="pcak__qty">
+                <a class="pcak__qty-btn" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | minus: 1 }}" aria-label="Decrease quantity">−</a>
+                <input type="number" name="updates[]" value="{{ item.quantity }}" min="0" aria-label="Quantity for {{ item.product.title | escape }}">
+                <a class="pcak__qty-btn" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity={{ item.quantity | plus: 1 }}" aria-label="Increase quantity">+</a>
+              </div>
+              <a class="pcak__remove" href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0">Remove</a>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+
+      {%- comment -%} Bath Bonnet add-on prompt {%- endcomment -%}
+      {%- if addon != blank and addon_in_cart == false and addon.available -%}
+        <div class="pcak__addon">
+          <div class="pcak__addon-media">
+            {%- if addon.featured_image -%}
+              {{ addon.featured_image | image_url: width: 200 | image_tag: loading: 'lazy', alt: addon.title }}
+            {%- endif -%}
+          </div>
+          <div class="pcak__addon-info">
+            <p class="pcak__addon-title">Complete the ritual</p>
+            <p class="pcak__addon-body">{{ section.settings.addon_copy }}</p>
+          </div>
+          <a class="pcak-btn pcak-btn--ghost" href="{{ addon.url }}">View</a>
+        </div>
+      {%- endif -%}
+
+      <div class="pcak__summary">
+        <div class="pcak__summary-row">
+          <span>Subtotal</span>
+          <span>{{ cart.total_price | money }}</span>
+        </div>
+        <p class="pcak__note">{{ section.settings.discount_note }}</p>
+        <p class="pcak__note">Taxes and shipping calculated at checkout.</p>
+        <button type="submit" name="update" class="pcak-btn pcak-btn--ghost pcak__update">Update Cart</button>
+        <button type="submit" name="checkout" class="pcak-btn pcak-btn--primary pcak__checkout">Checkout</button>
+        <ul class="pcak__trust">
+          <li>Secure checkout</li>
+          <li>Sizing help: {% if section.settings.support_email != blank %}<a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a>{% else %}see FAQ{% endif %}</li>
+          {%- if section.settings.processing_days != blank and section.settings.transit_days != blank -%}
+            <li>Ships in {{ section.settings.processing_days }} · arrives in {{ section.settings.transit_days }}</li>
+          {%- endif -%}
+        </ul>
+      </div>
+    </form>
+  {%- endif -%}
+</section>
+
+<style>
+  :root {
+    --pcak-obsidian: #0B0B0C;
+    --pcak-ivory: #F5F0E6;
+    --pcak-gold: #B08D57;
+    --pcak-charcoal: #1C1B1A;
+  }
+
+  body { background: var(--pcak-obsidian); }
+
+  .pcak-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px clamp(20px, 4vw, 48px);
+    background: var(--pcak-obsidian);
+    border-bottom: 1px solid rgba(176,141,87,.18);
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+
+  .pcak-topbar__brand {
+    color: var(--pcak-ivory);
+    text-decoration: none;
+    letter-spacing: .28em;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .pcak-topbar__links a {
+    color: rgba(245,240,230,.75);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+  .pcak-topbar__links a:hover { color: var(--pcak-gold); }
+
+  .pcak {
+    background: var(--pcak-obsidian);
+    color: var(--pcak-ivory);
+    font-family: "DM Sans", system-ui, sans-serif;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 72px) clamp(20px, 4vw, 48px) 96px;
+  }
+
+  .pcak__title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: -.02em;
+    margin: 0 0 32px;
+  }
+
+  .pcak__empty { text-align: center; padding: 64px 0; color: rgba(245,240,230,.7); font-size: 17px; }
+  .pcak__empty .pcak-btn { margin-top: 24px; }
+
+  .pcak__shipbar { margin-bottom: 32px; }
+  .pcak__shipbar-msg { font-size: 14px; color: rgba(245,240,230,.8); margin: 0 0 10px; }
+  .pcak__shipbar-msg--met { color: var(--pcak-gold); }
+  .pcak__shipbar-track { height: 3px; background: rgba(176,141,87,.15); }
+  .pcak__shipbar-fill { height: 100%; background: var(--pcak-gold); transition: width .3s ease; }
+
+  .pcak__items { display: flex; flex-direction: column; }
+
+  .pcak__item {
+    display: grid;
+    grid-template-columns: 96px 1fr auto;
+    gap: 20px;
+    align-items: center;
+    padding: 24px 0;
+    border-top: 1px solid rgba(176,141,87,.18);
+  }
+  .pcak__item:last-child { border-bottom: 1px solid rgba(176,141,87,.18); }
+
+  .pcak__item-media { display: block; aspect-ratio: 4/5; background: var(--pcak-charcoal); overflow: hidden; }
+  .pcak__item-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .pcak__item-name {
+    color: var(--pcak-ivory);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .pcak__item-variant { color: rgba(245,240,230,.55); font-size: 13px; margin: 0 0 8px; }
+  .pcak__item-price { color: var(--pcak-gold); font-size: 14px; margin: 0; display: flex; gap: 8px; }
+  .pcak__item-price s { color: rgba(245,240,230,.4); }
+
+  .pcak__item-controls { display: flex; flex-direction: column; align-items: flex-end; gap: 10px; }
+
+  .pcak__qty { display: inline-flex; align-items: stretch; border: 1px solid rgba(176,141,87,.3); border-radius: 2px; }
+  .pcak__qty-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px;
+    background: var(--pcak-charcoal);
+    color: var(--pcak-ivory);
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .pcak__qty input {
+    width: 52px;
+    text-align: center;
+    background: var(--pcak-obsidian);
+    color: var(--pcak-ivory);
+    border: none;
+    border-left: 1px solid rgba(176,141,87,.3);
+    border-right: 1px solid rgba(176,141,87,.3);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 10px 0;
+    -moz-appearance: textfield;
+  }
+  .pcak__qty input::-webkit-outer-spin-button, .pcak__qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .pcak__remove {
+    color: rgba(245,240,230,.45);
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(245,240,230,.2);
+  }
+  .pcak__remove:hover { color: var(--pcak-gold); border-color: var(--pcak-gold); }
+
+  .pcak__addon {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 18px;
+    align-items: center;
+    margin-top: 28px;
+    padding: 20px;
+    border: 1px solid rgba(176,141,87,.3);
+    background: radial-gradient(ellipse at left, rgba(176,141,87,.06), transparent 70%);
+  }
+  .pcak__addon-media { aspect-ratio: 1; overflow: hidden; background: var(--pcak-charcoal); }
+  .pcak__addon-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pcak__addon-title {
+    color: var(--pcak-gold);
+    font-size: 11px;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 0 0 6px;
+  }
+  .pcak__addon-body { color: rgba(245,240,230,.8); font-size: 14px; line-height: 1.5; margin: 0; }
+
+  .pcak__summary { margin-top: 40px; display: flex; flex-direction: column; gap: 14px; }
+
+  .pcak__summary-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: 700;
+    padding-top: 18px;
+  }
+
+  .pcak__note { color: rgba(245,240,230,.55); font-size: 13px; margin: 0; }
+
+  .pcak-btn {
+    display: inline-block;
+    padding: 18px 38px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid var(--pcak-gold);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    font-family: inherit;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 2px;
+  }
+  .pcak-btn--primary { background: var(--pcak-gold); color: var(--pcak-obsidian); }
+  .pcak-btn--primary:hover { background: transparent; color: var(--pcak-gold); }
+  .pcak-btn--ghost { background: transparent; color: var(--pcak-gold); }
+  .pcak-btn--ghost:hover { background: rgba(176,141,87,.1); }
+
+  .pcak__checkout { width: 100%; padding: 20px; font-size: 14px; }
+  .pcak__update { align-self: flex-start; padding: 12px 24px; font-size: 11px; }
+
+  .pcak__trust {
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  .pcak__trust li {
+    color: rgba(245,240,230,.55);
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+  }
+  .pcak__trust a { color: var(--pcak-gold); }
+
+  @media (max-width: 640px) {
+    .pcak__item { grid-template-columns: 72px 1fr; }
+    .pcak__item-controls { grid-column: 2; flex-direction: row; align-items: center; justify-content: space-between; width: 100%; }
+    .pcak__addon { grid-template-columns: 56px 1fr; }
+    .pcak__addon .pcak-btn { grid-column: 2; justify-self: start; padding: 10px 20px; font-size: 11px; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "PCA Cart Page",
+  "settings": [
+    {
+      "type": "number",
+      "id": "free_shipping_threshold_cents",
+      "label": "Free shipping threshold (cents)",
+      "default": 6500
+    },
+    {
+      "type": "url",
+      "id": "collection_url",
+      "label": "Continue shopping URL"
+    },
+    {
+      "type": "product",
+      "id": "addon_product",
+      "label": "Add-on product (Bath Bonnet)"
+    },
+    {
+      "type": "text",
+      "id": "addon_copy",
+      "label": "Add-on prompt copy",
+      "default": "Add the Rare Skin Bath Bonnet™ to any wardrobe order for $11.99."
+    },
+    {
+      "type": "text",
+      "id": "discount_note",
+      "label": "Discount note",
+      "default": "Buy 2, save 15% · Buy 3, save 20% — applied automatically at checkout."
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email"
+    },
+    {
+      "type": "text",
+      "id": "processing_days",
+      "label": "Processing time"
+    },
+    {
+      "type": "text",
+      "id": "transit_days",
+      "label": "Transit time"
+    }
+  ]
+}
+{% endschema %}

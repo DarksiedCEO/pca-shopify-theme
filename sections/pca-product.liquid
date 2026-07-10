@@ -1,0 +1,511 @@
+{% comment %}
+  PCA™ Product Page (PDP)
+  Path: sections/pca-product.liquid
+  Luxury conversion PDP per docs/launch-blueprint.md — obsidian/ivory/gold system.
+  Trust rules: no fake reviews, no fake urgency, no fake scarcity. Policy copy renders
+  only from settings with honest fallbacks — never invent shipping/return facts.
+{% endcomment %}
+
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<nav class="pcap-topbar">
+  <a class="pcap-topbar__brand" href="{{ routes.root_url }}">PUSSYCAT ALLEY™</a>
+  <div class="pcap-topbar__links">
+    <a href="{{ section.settings.collection_url | default: routes.all_products_collection_url }}">Wardrobe</a>
+    <a href="{{ routes.cart_url }}">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+  </div>
+</nav>
+
+<section class="pcap" data-section-id="{{ section.id }}">
+  <div class="pcap__layout">
+
+    {%- comment -%} ── Gallery ── {%- endcomment -%}
+    <div class="pcap__gallery">
+      <div class="pcap__media-main">
+        {%- if product.featured_media -%}
+          {{ product.featured_media | image_url: width: 1400 | image_tag: id: 'pcap-main-image', class: 'pcap__main-img', loading: 'eager', alt: product.title }}
+        {%- else -%}
+          <div class="pcap__media-placeholder"></div>
+        {%- endif -%}
+      </div>
+      {%- if product.media.size > 1 -%}
+        <div class="pcap__thumbs">
+          {%- for media in product.media limit: 8 -%}
+            <button type="button" class="pcap__thumb{% if forloop.first %} is-active{% endif %}" data-full="{{ media | image_url: width: 1400 }}" aria-label="View image {{ forloop.index }}">
+              {{ media | image_url: width: 200 | image_tag: loading: 'lazy', alt: product.title }}
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── Buy box ── {%- endcomment -%}
+    <div class="pcap__info">
+      <p class="pcap__eyebrow">The Rare Ones Wardrobe</p>
+      <h1 class="pcap__title">{{ product.title }}</h1>
+
+      <p class="pcap__price" id="pcap-price">
+        <span class="pcap__price-compare" id="pcap-compare"{% unless current_variant.compare_at_price > current_variant.price %} hidden{% endunless %}>
+          {{ current_variant.compare_at_price | money }}
+        </span>
+        <span class="pcap__price-current" id="pcap-current">{{ current_variant.price | money }}</span>
+      </p>
+
+      {% form 'product', product, id: 'pcap-form', class: 'pcap__form' %}
+        <input type="hidden" name="id" id="pcap-variant-id" value="{{ current_variant.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="pcap__option">
+              <label class="pcap__label" for="pcap-opt-{{ forloop.index }}">{{ option.name }}</label>
+              <select class="pcap__select pcap-option" id="pcap-opt-{{ forloop.index }}" data-index="{{ forloop.index }}">
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}"{% if option.selected_value == value %} selected{% endif %}>{{ value }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="pcap__option">
+          <label class="pcap__label" for="pcap-qty">Quantity</label>
+          <div class="pcap__qty">
+            <button type="button" class="pcap__qty-btn" data-qty="-1" aria-label="Decrease quantity">−</button>
+            <input type="number" id="pcap-qty" name="quantity" value="1" min="1" inputmode="numeric">
+            <button type="button" class="pcap__qty-btn" data-qty="1" aria-label="Increase quantity">+</button>
+          </div>
+        </div>
+
+        <button type="submit" id="pcap-atc" class="pcap-btn pcap-btn--primary pcap__atc"{% unless current_variant.available %} disabled{% endunless %}>
+          {% if current_variant.available %}Add To Cart{% else %}Sold Out{% endif %}
+        </button>
+      {% endform %}
+
+      <p class="pcap__trust">Secure checkout · Curated for hairless breeds · Savings apply automatically in cart</p>
+
+      {%- if section.settings.support_email != blank -%}
+        <p class="pcap__sizing-help">Need sizing help? Email us at <a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a> before checkout.</p>
+      {%- endif -%}
+
+      {%- comment -%} ── Accordions ── {%- endcomment -%}
+      <div class="pcap__accordions">
+        {%- if product.description != blank -%}
+          <details open>
+            <summary>Details</summary>
+            <div class="pcap__rte">{{ product.description }}</div>
+          </details>
+        {%- endif -%}
+
+        <details>
+          <summary>Size &amp; Fit</summary>
+          <div class="pcap__rte">
+            <p>Size by chest measurement and weight — not breed guesswork. Measure around the widest part of your cat's chest, just behind the front legs, and check it against the size chart. Between sizes? Size up — a slightly looser fit is more comfortable and safer for hairless skin.</p>
+            {%- if section.settings.size_chart_image != blank -%}
+              {{ section.settings.size_chart_image | image_url: width: 1200 | image_tag: loading: 'lazy', class: 'pcap__size-chart', alt: 'Size chart' }}
+            {%- endif -%}
+            {%- if section.settings.support_email != blank -%}
+              <p>Unsure? Email your cat's measurements to <a href="mailto:{{ section.settings.support_email }}">{{ section.settings.support_email }}</a> and we'll help before you order.</p>
+            {%- endif -%}
+          </div>
+        </details>
+
+        <details>
+          <summary>Shipping &amp; Processing</summary>
+          <div class="pcap__rte">
+            <p>
+              {%- if section.settings.processing_days != blank and section.settings.transit_days != blank -%}
+                Orders are processed within {{ section.settings.processing_days }}. Most U.S. orders arrive within {{ section.settings.transit_days }} after processing. Delivery times may vary by location and carrier conditions.
+              {%- else -%}
+                Full shipping timelines are shown at checkout before you pay.
+              {%- endif -%}
+              You'll get tracking the moment it ships.
+            </p>
+          </div>
+        </details>
+
+        <details>
+          <summary>Returns &amp; Hygiene</summary>
+          <div class="pcap__rte">
+            <p>Worn pet apparel and used bath accessories cannot be returned or exchanged for hygiene reasons.
+            {%- if section.settings.return_window_days != blank %} Unworn, unwashed items in original packaging can be returned within {{ section.settings.return_window_days }} days of delivery.{% endif %}
+            If something arrives damaged or incorrect, we'll always make it right.</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ── Sticky mobile add-to-cart ── {%- endcomment -%}
+<div class="pcap-sticky" id="pcap-sticky" hidden>
+  <div class="pcap-sticky__info">
+    <span class="pcap-sticky__name">{{ product.title }}</span>
+    <span class="pcap-sticky__price" id="pcap-sticky-price">{{ current_variant.price | money }}</span>
+  </div>
+  <button type="submit" form="pcap-form" class="pcap-btn pcap-btn--primary pcap-sticky__btn"{% unless current_variant.available %} disabled{% endunless %}>
+    {% if current_variant.available %}Add To Cart{% else %}Sold Out{% endif %}
+  </button>
+</div>
+
+<script type="application/json" id="pcap-variants-{{ section.id }}">{{ product.variants | json }}</script>
+<script>
+(function () {
+  var data = JSON.parse(document.getElementById('pcap-variants-{{ section.id }}').textContent);
+  var selects = Array.prototype.slice.call(document.querySelectorAll('.pcap-option'));
+  var idInput = document.getElementById('pcap-variant-id');
+  var priceEl = document.getElementById('pcap-current');
+  var compareEl = document.getElementById('pcap-compare');
+  var atc = document.getElementById('pcap-atc');
+  var stickyBtn = document.querySelector('.pcap-sticky__btn');
+  var stickyPrice = document.getElementById('pcap-sticky-price');
+  var mainImg = document.getElementById('pcap-main-image');
+
+  function money(cents) { return '$' + (cents / 100).toFixed(2); }
+
+  function resolve() {
+    if (!selects.length) return;
+    var opts = selects.map(function (s) { return s.value; });
+    var v = data.find(function (variant) {
+      return opts.every(function (o, i) { return variant['option' + (i + 1)] === o; });
+    });
+    var available = !!(v && v.available);
+    if (v) {
+      idInput.value = v.id;
+      priceEl.textContent = money(v.price);
+      if (stickyPrice) stickyPrice.textContent = money(v.price);
+      if (v.compare_at_price && v.compare_at_price > v.price) {
+        compareEl.textContent = money(v.compare_at_price);
+        compareEl.hidden = false;
+      } else {
+        compareEl.hidden = true;
+      }
+      if (v.featured_image && v.featured_image.src && mainImg) {
+        mainImg.src = v.featured_image.src;
+      }
+    }
+    [atc, stickyBtn].forEach(function (btn) {
+      if (!btn) return;
+      btn.disabled = !available;
+      btn.textContent = v ? (available ? 'Add To Cart' : 'Sold Out') : 'Unavailable';
+    });
+  }
+  selects.forEach(function (s) { s.addEventListener('change', resolve); });
+
+  // Gallery thumbs
+  document.querySelectorAll('.pcap__thumb').forEach(function (t) {
+    t.addEventListener('click', function () {
+      if (mainImg) mainImg.src = t.getAttribute('data-full');
+      document.querySelectorAll('.pcap__thumb').forEach(function (x) { x.classList.remove('is-active'); });
+      t.classList.add('is-active');
+    });
+  });
+
+  // Quantity
+  var qty = document.getElementById('pcap-qty');
+  document.querySelectorAll('.pcap__qty-btn').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var next = parseInt(qty.value || '1', 10) + parseInt(b.getAttribute('data-qty'), 10);
+      qty.value = Math.max(1, next);
+    });
+  });
+
+  // Sticky bar after buy box scrolls past (mobile)
+  var sticky = document.getElementById('pcap-sticky');
+  var anchor = document.getElementById('pcap-atc');
+  if (sticky && anchor && 'IntersectionObserver' in window) {
+    new IntersectionObserver(function (entries) {
+      sticky.hidden = entries[0].isIntersecting || entries[0].boundingClientRect.top > 0;
+    }).observe(anchor);
+  }
+})();
+</script>
+
+<style>
+  :root {
+    --pcap-obsidian: #0B0B0C;
+    --pcap-ivory: #F5F0E6;
+    --pcap-gold: #B08D57;
+    --pcap-charcoal: #1C1B1A;
+  }
+
+  body { background: var(--pcap-obsidian); }
+
+  .pcap-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px clamp(20px, 4vw, 48px);
+    background: var(--pcap-obsidian);
+    border-bottom: 1px solid rgba(176, 141, 87, .18);
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+
+  .pcap-topbar__brand {
+    color: var(--pcap-ivory);
+    text-decoration: none;
+    letter-spacing: .28em;
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .pcap-topbar__links { display: flex; gap: 24px; }
+
+  .pcap-topbar__links a {
+    color: rgba(245, 240, 230, .75);
+    text-decoration: none;
+    font-size: 12px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+  }
+
+  .pcap-topbar__links a:hover { color: var(--pcap-gold); }
+
+  .pcap {
+    background: var(--pcap-obsidian);
+    color: var(--pcap-ivory);
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+
+  .pcap__layout {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap: clamp(32px, 5vw, 72px);
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: clamp(32px, 5vw, 64px) clamp(20px, 4vw, 48px) 96px;
+  }
+
+  .pcap__media-main {
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    background: var(--pcap-charcoal);
+  }
+
+  .pcap__main-img, .pcap__media-placeholder {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .pcap__media-placeholder {
+    background: radial-gradient(circle at center, rgba(176,141,87,.1), transparent 60%);
+  }
+
+  .pcap__thumbs {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .pcap__thumb {
+    aspect-ratio: 1;
+    overflow: hidden;
+    padding: 0;
+    border: 1px solid transparent;
+    background: var(--pcap-charcoal);
+    cursor: pointer;
+  }
+
+  .pcap__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .7; transition: opacity .2s; }
+  .pcap__thumb:hover img, .pcap__thumb.is-active img { opacity: 1; }
+  .pcap__thumb.is-active { border-color: var(--pcap-gold); }
+
+  .pcap__eyebrow {
+    color: var(--pcap-gold);
+    text-transform: uppercase;
+    letter-spacing: .22em;
+    font-size: 11px;
+    font-weight: 700;
+    margin: 0 0 14px;
+  }
+
+  .pcap__title {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(34px, 4vw, 54px);
+    line-height: 1.02;
+    letter-spacing: -.02em;
+    margin: 0 0 18px;
+  }
+
+  .pcap__price { display: flex; align-items: baseline; gap: 12px; margin: 0 0 28px; }
+  .pcap__price-compare { color: rgba(245,240,230,.45); text-decoration: line-through; font-size: 17px; }
+  .pcap__price-current { color: var(--pcap-gold); font-size: 24px; font-weight: 700; letter-spacing: .02em; }
+
+  .pcap__form { display: flex; flex-direction: column; gap: 20px; }
+
+  .pcap__label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: rgba(245,240,230,.6);
+    margin-bottom: 8px;
+  }
+
+  .pcap__select {
+    width: 100%;
+    background: var(--pcap-charcoal);
+    color: var(--pcap-ivory);
+    border: 1px solid rgba(176,141,87,.3);
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 15px;
+    border-radius: 2px;
+  }
+
+  .pcap__qty { display: inline-flex; align-items: stretch; border: 1px solid rgba(176,141,87,.3); border-radius: 2px; }
+
+  .pcap__qty-btn {
+    background: var(--pcap-charcoal);
+    color: var(--pcap-ivory);
+    border: none;
+    width: 46px;
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .pcap__qty input {
+    width: 64px;
+    text-align: center;
+    background: var(--pcap-obsidian);
+    color: var(--pcap-ivory);
+    border: none;
+    border-left: 1px solid rgba(176,141,87,.3);
+    border-right: 1px solid rgba(176,141,87,.3);
+    font-family: inherit;
+    font-size: 15px;
+    -moz-appearance: textfield;
+  }
+  .pcap__qty input::-webkit-outer-spin-button, .pcap__qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .pcap-btn {
+    display: inline-block;
+    padding: 18px 38px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid var(--pcap-gold);
+    cursor: pointer;
+    transition: background .2s, color .2s;
+    font-family: inherit;
+    text-decoration: none;
+    border-radius: 2px;
+  }
+
+  .pcap-btn--primary { background: var(--pcap-gold); color: var(--pcap-obsidian); }
+  .pcap-btn--primary:hover { background: transparent; color: var(--pcap-gold); }
+  .pcap-btn--primary:disabled { opacity: .45; cursor: not-allowed; }
+
+  .pcap__atc { width: 100%; padding: 20px; font-size: 14px; }
+
+  .pcap__trust {
+    font-size: 11px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: rgba(245,240,230,.55);
+    margin: 18px 0 6px;
+  }
+
+  .pcap__sizing-help { font-size: 14px; color: rgba(245,240,230,.75); margin: 0 0 8px; }
+  .pcap__sizing-help a { color: var(--pcap-gold); }
+
+  .pcap__accordions { margin-top: 28px; border-top: 1px solid rgba(176,141,87,.18); }
+
+  .pcap__accordions details { border-bottom: 1px solid rgba(176,141,87,.18); padding: 18px 0; }
+
+  .pcap__accordions summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 15px;
+    letter-spacing: .04em;
+  }
+  .pcap__accordions summary::-webkit-details-marker { display: none; }
+  .pcap__accordions summary::after { content: '+'; color: var(--pcap-gold); font-size: 18px; margin-left: 16px; }
+  .pcap__accordions details[open] summary::after { content: '\2212'; }
+
+  .pcap__rte { margin-top: 12px; color: rgba(245,240,230,.75); font-size: 15px; line-height: 1.75; }
+  .pcap__rte a { color: var(--pcap-gold); }
+  .pcap__size-chart { max-width: 100%; border: 1px solid rgba(176,141,87,.2); margin: 12px 0; }
+
+  .pcap-sticky {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
+    background: #101011;
+    border-top: 1px solid rgba(176,141,87,.25);
+    z-index: 100;
+    font-family: "DM Sans", system-ui, sans-serif;
+  }
+
+  .pcap-sticky__info { display: flex; flex-direction: column; overflow: hidden; }
+  .pcap-sticky__name {
+    color: var(--pcap-ivory);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .pcap-sticky__price { color: var(--pcap-gold); font-size: 15px; font-weight: 700; }
+  .pcap-sticky__btn { flex-shrink: 0; padding: 14px 22px; font-size: 12px; white-space: nowrap; }
+
+  @media (max-width: 900px) {
+    .pcap__layout { grid-template-columns: 1fr; padding-bottom: 120px; }
+    .pcap__thumbs { grid-template-columns: repeat(6, 1fr); }
+    .pcap-sticky:not([hidden]) { display: flex; }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "PCA Product Page",
+  "settings": [
+    {
+      "type": "url",
+      "id": "collection_url",
+      "label": "Wardrobe link URL",
+      "info": "Top bar link. Defaults to all products."
+    },
+    {
+      "type": "image_picker",
+      "id": "size_chart_image",
+      "label": "Size chart image"
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email"
+    },
+    {
+      "type": "text",
+      "id": "processing_days",
+      "label": "Processing time",
+      "info": "e.g. 1–3 business days"
+    },
+    {
+      "type": "text",
+      "id": "transit_days",
+      "label": "Transit time",
+      "info": "e.g. 5–11 business days"
+    },
+    {
+      "type": "text",
+      "id": "return_window_days",
+      "label": "Return window (days)"
+    }
+  ]
+}
+{% endschema %}

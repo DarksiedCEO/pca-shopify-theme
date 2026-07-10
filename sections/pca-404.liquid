@@ -1,0 +1,109 @@
+{% comment %}
+  PCA™ 404 Page
+  Path: sections/pca-404.liquid
+  Brand-consistent not-found page — routes visitors back into the wardrobe.
+{% endcomment %}
+
+<section class="pca4">
+  <p class="pca4__eyebrow">Pussycat Alley™</p>
+  <h1>{{ section.settings.heading }}</h1>
+  <p class="pca4__body">{{ section.settings.body }}</p>
+  <div class="pca4__ctas">
+    <a class="pca4-btn pca4-btn--primary" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">{{ section.settings.cta_text }}</a>
+    <a class="pca4-btn pca4-btn--ghost" href="{{ routes.root_url }}">Return Home</a>
+  </div>
+</section>
+
+<style>
+  body { background: #0B0B0C; }
+
+  .pca4 {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #0B0B0C radial-gradient(ellipse at center, rgba(176,141,87,.05), transparent 65%);
+    color: #F5F0E6;
+    font-family: "DM Sans", system-ui, sans-serif;
+    padding: 64px 24px;
+  }
+
+  .pca4__eyebrow {
+    color: #B08D57;
+    text-transform: uppercase;
+    letter-spacing: .28em;
+    font-size: 12px;
+    font-weight: 700;
+    margin: 0 0 20px;
+  }
+
+  .pca4 h1 {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 72px);
+    letter-spacing: -.02em;
+    line-height: 1;
+    margin: 0 0 18px;
+    max-width: 640px;
+  }
+
+  .pca4__body {
+    color: rgba(245,240,230,.7);
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 480px;
+    margin: 0 0 36px;
+  }
+
+  .pca4__ctas { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; }
+
+  .pca4-btn {
+    display: inline-block;
+    padding: 18px 38px;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    font-size: 13px;
+    font-weight: 700;
+    border: 1px solid #B08D57;
+    text-decoration: none;
+    transition: background .2s, color .2s;
+    border-radius: 2px;
+  }
+  .pca4-btn--primary { background: #B08D57; color: #0B0B0C; }
+  .pca4-btn--primary:hover { background: transparent; color: #B08D57; }
+  .pca4-btn--ghost { background: transparent; color: #B08D57; }
+  .pca4-btn--ghost:hover { background: rgba(176,141,87,.1); }
+</style>
+
+{% schema %}
+{
+  "name": "PCA 404 Page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "This alley leads nowhere."
+    },
+    {
+      "type": "textarea",
+      "id": "body",
+      "label": "Body",
+      "default": "The page you're looking for has moved or never existed. The wardrobe, however, is very real."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA text",
+      "default": "Shop The Rare Ones Wardrobe"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "CTA URL"
+    }
+  ]
+}
+{% endschema %}
