@@ -9,48 +9,45 @@
  */
 {
   "sections": {
-    "pca_obsidian_landing": {
-      "type": "pca-obsidian-landing",
+    "pca_wardrobe_landing": {
+      "type": "pca-wardrobe-landing",
       "settings": {
-        "eyebrow": "PCA™ Hydration Ritual",
-        "heading": "Water, elevated.",
-        "subheading": "The PCA™ Obsidian Hydration Fountain turns daily water into a luxury feline wellness ritual for cats who live beautifully.",
-        "product": "pca™-smart-hydration-fountain",
-        "cta_text": "Begin The Ritual",
-        "fallback_url": "",
-        "learn_more_url": "",
-        "learn_more_text": "Learn More",
-        "hero_image": "shopify://shop_images/PCA_OBSIDIAN_HERO_PORTRAIT_V1.png",
-        "hero_alt": "PCA Obsidian Hydration Fountain in a luxury home setting",
-        "free_shipping_threshold": "$75",
-        "urgency_eyebrow": "Why Now",
-        "urgency_heading": "Founder launch pricing.",
-        "urgency_body": "Obsidian is in its founding chapter. The price you see today reflects that. Once the first production run sells through, this changes.",
-        "edu_image": "shopify://shop_images/PCA_OBSIDIAN_EDUCATION_V1.png",
-        "lifestyle_image_1": "shopify://shop_images/PCA_OBSIDIAN_LIFESTYLE_01_V1.png",
-        "lifestyle_image_2": "shopify://shop_images/PCA_OBSIDIAN_LIFESTYLE_02_V1_eb2b5532-69ad-4169-9086-b2ac348fba11.png",
-        "lifestyle_image_3": "shopify://shop_images/PCA_OBSIDIAN_LIFESTYLE_03_V2.png",
-        "founder_quote": "<p>PCA was built for one reason: Sphynx cats deserve the same level of thoughtful design that their owners give to the rest of their home. Obsidian is the beginning of that standard.</p>",
-        "founder_name": "",
-        "founder_title": "Founder, PCA™",
-        "guarantee_heading": "The PCA Promise",
-        "guarantee_body": "Every product we offer is selected with the same standards we would expect for our own cats. If you need assistance with your order, our team is here to help.",
-        "support_heading": "White-Glove Support",
-        "support_body": "Questions before or after your purchase? Our team is here to help with product guidance, order support, and everything in between.",
-        "contact_heading": "Direct Contact",
-        "contact_body": "Need assistance? Reach out directly and we'll make sure you're connected with the right member of the PCA team.",
-        "contact_email": "sales@pussycatalley.com",
-        "card_image_1": "shopify://shop_images/PCA_OBSIDIAN_FEATURE_MOVING_WATER_V1.png",
-        "card_image_2": "shopify://shop_images/PCA_OBSIDIAN_FEATURE_INTERIORS_V1.png",
-        "card_image_3": "shopify://shop_images/PCA_OBSIDIAN_FEATURE_STEEL_V1.png",
-        "email_heading": "The Ritual Starts Here",
-        "email_subheading": "Be first to access new releases, exclusive offers, feline wellness insights, and the products we're developing for the PCA ritual system.",
-        "email_placeholder": "Enter your email",
-        "email_cta": "Join The Alley"
-      }
+        "support_email": "support@pussycatalley.com",
+        "processing_days": "1–3 business days",
+        "transit_days": "5–11 business days",
+        "return_window_days": "14",
+        "hygiene_policy_body": "Worn pet apparel and used bath accessories cannot be returned or exchanged for hygiene reasons."
+      },
+      "blocks": {
+        "trust-1": { "type": "trust_item", "settings": { "text": "Curated for hairless breeds" } },
+        "trust-2": { "type": "trust_item", "settings": { "text": "Secure checkout" } },
+        "trust-3": { "type": "trust_item", "settings": { "text": "Buy 2, save 15% · Buy 3, save 20%" } },
+        "trust-4": { "type": "trust_item", "settings": { "text": "New brand — first drop" } },
+        "product-1": { "type": "product", "settings": { "name_fallback": "Rare Skin Turtleneck™", "descriptor": "Soft polar fleece, cut close for warmth without weight.", "price_fallback": "$29.99" } },
+        "product-2": { "type": "product", "settings": { "name_fallback": "Alley Scholar Collection™", "descriptor": "British-tailored statement pieces — every piece sold separately.", "price_fallback": "From $39.99" } },
+        "product-3": { "type": "product", "settings": { "name_fallback": "Rare Skin Lounge Hoodie™", "descriptor": "Heavier weight for lounging season.", "price_fallback": "$32.99" } },
+        "product-4": { "type": "product", "settings": { "name_fallback": "Rare One Winter Vest™", "descriptor": "Their coldest-month armor.", "price_fallback": "From $39.99" } },
+        "product-5": { "type": "product", "settings": { "name_fallback": "Alley Stripe Summer Suit™", "descriptor": "Fine-stripe, lightweight, unmistakably tailored.", "price_fallback": "$24.99" } },
+        "product-6": { "type": "product", "settings": { "name_fallback": "Rare Skin Bath Bonnet™", "descriptor": "Ear protection for bath day, in five colors.", "price_fallback": "$14.99" } },
+        "style-1": { "type": "style_guide_item", "settings": { "use_case": "Best for everyday warmth", "recommended_product": "Rare Skin Turtleneck™" } },
+        "style-2": { "type": "style_guide_item", "settings": { "use_case": "Best for lounging", "recommended_product": "Rare Skin Lounge Hoodie™" } },
+        "style-3": { "type": "style_guide_item", "settings": { "use_case": "Best for winter", "recommended_product": "Rare One Winter Vest™" } },
+        "style-4": { "type": "style_guide_item", "settings": { "use_case": "Best for summer", "recommended_product": "Alley Stripe Summer Suit™" } },
+        "style-5": { "type": "style_guide_item", "settings": { "use_case": "Best statement piece", "recommended_product": "Alley Scholar Collection™" } },
+        "style-6": { "type": "style_guide_item", "settings": { "use_case": "Best bath-care add-on", "recommended_product": "Rare Skin Bath Bonnet™" } },
+        "promise-1": { "type": "promise_item", "settings": { "text": "Every piece selected and fit-checked specifically for hairless and thin-coated breeds, not repurposed generic pet apparel." } },
+        "promise-2": { "type": "promise_item", "settings": { "text": "Sized by weight and measurement, not guesswork." } },
+        "promise-3": { "type": "promise_item", "settings": { "text": "Every piece hand-inspected before it ships." } }
+      },
+      "block_order": [
+        "trust-1", "trust-2", "trust-3", "trust-4",
+        "product-1", "product-2", "product-3", "product-4", "product-5", "product-6",
+        "style-1", "style-2", "style-3", "style-4", "style-5", "style-6",
+        "promise-1", "promise-2", "promise-3"
+      ]
     }
   },
   "order": [
-    "pca_obsidian_landing"
+    "pca_wardrobe_landing"
   ]
 }
