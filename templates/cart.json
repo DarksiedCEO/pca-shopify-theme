@@ -13,6 +13,7 @@
       "type": "pca-cart",
       "settings": {
         "free_shipping_threshold_cents": 6500,
+        "collection_url": "shopify://collections/the-rare-ones-wardrobe",
         "addon_product": "rare-skin-bath-bonnet",
         "addon_copy": "Add the Rare Skin Bath Bonnet™ — from $11.99 with any wardrobe order.",
         "support_email": "sales@pussycatalley.com",
