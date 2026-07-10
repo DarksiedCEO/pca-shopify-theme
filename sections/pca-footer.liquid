@@ -1,0 +1,360 @@
+{% comment %}
+  PCA™ Global Footer
+  Path: sections/pca-footer.liquid
+  Rendered once, site-wide, from layout/theme.liquid — every template (home, product,
+  collection, cart, 404) was missing a footer entirely before this section existed.
+  Visual reference: main pussycatalley.com marketing-site footer (monogram + wordmark,
+  five-column structure, obsidian/ivory/gold). Content is adapted to what this Shopify
+  store actually sells (Wardrobe), not copied verbatim from the marketing-site footer's
+  Obsidian-era Ritual/Balm/Wipes lineup.
+  Trust rule: policy/social links render only when a real value exists. No fake links.
+{% endcomment %}
+
+<footer class="pcaf">
+  <div class="pcaf__top">
+    <div class="pcaf__brand">
+      <a class="pcaf__mark" href="{{ routes.root_url }}">
+        <span class="pcaf__monogram">PA</span>
+        <span class="pcaf__wordmark">Pussycat Alley</span>
+      </a>
+      <p class="pcaf__tagline">{{ section.settings.tagline }}</p>
+      {%- if section.settings.instagram_url != blank or section.settings.tiktok_url != blank -%}
+        <div class="pcaf__social">
+          {%- if section.settings.instagram_url != blank -%}
+            <a href="{{ section.settings.instagram_url }}" target="_blank" rel="noopener">Instagram</a>
+          {%- endif -%}
+          {%- if section.settings.tiktok_url != blank -%}
+            <a href="{{ section.settings.tiktok_url }}" target="_blank" rel="noopener">TikTok</a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pcaf__col">
+      <p class="pcaf__col-heading">Shop</p>
+      <ul class="pcaf__links">
+        <li><a href="{{ routes.root_url }}#pcaw-collection">Wardrobe</a></li>
+        {%- assign bonnet_product = all_products['rare-skin-bath-bonnet'] -%}
+        <li><a href="{{ section.settings.bonnet_url | default: bonnet_product.url | default: routes.root_url }}">Bath Bonnet</a></li>
+        <li><a href="{{ routes.cart_url }}">Cart</a></li>
+        <li><a href="{{ routes.root_url }}#pcaw-size-guide">Size Guide</a></li>
+      </ul>
+    </div>
+
+    <div class="pcaf__col">
+      <p class="pcaf__col-heading">Ritual</p>
+      <ul class="pcaf__links">
+        <li><a href="{{ routes.root_url }}#pcaw-education">Why Layers Matter</a></li>
+        <li><a href="{{ routes.root_url }}#pcaw-faq">FAQ</a></li>
+      </ul>
+    </div>
+
+    <div class="pcaf__col">
+      <p class="pcaf__col-heading">Company</p>
+      <ul class="pcaf__links">
+        {%- if section.settings.support_email != blank -%}
+          <li><a href="mailto:{{ section.settings.support_email }}">Contact</a></li>
+        {%- endif -%}
+        {%- if shop.policies.refund_policy.url != blank -%}
+          <li><a href="{{ shop.policies.refund_policy.url }}">Shipping &amp; Returns</a></li>
+        {%- endif -%}
+        {%- if shop.policies.privacy_policy.url != blank -%}
+          <li><a href="{{ shop.policies.privacy_policy.url }}">Privacy Policy</a></li>
+        {%- endif -%}
+        {%- if shop.policies.terms_of_service.url != blank -%}
+          <li><a href="{{ shop.policies.terms_of_service.url }}">Terms</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+
+    <div class="pcaf__col pcaf__signup">
+      <p class="pcaf__col-heading">Join Our Email List</p>
+      <p class="pcaf__signup-copy">{{ section.settings.signup_copy }}</p>
+      {% form 'customer', id: 'pcaf-signup-form' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        {%- if form.posted_successfully? -%}
+          <p class="pcaf__signup-success">You're on the list.</p>
+        {%- else -%}
+          <div class="pcaf__signup-field">
+            <input type="email" name="contact[email]" placeholder="Enter your email" aria-label="Email address" required>
+            <button type="submit" class="pcaf__signup-btn">Join</button>
+          </div>
+          {%- if form.errors -%}
+            <p class="pcaf__signup-error">{{ form.errors.messages.email }}</p>
+          {%- endif -%}
+        {%- endif -%}
+      {% endform %}
+    </div>
+  </div>
+
+  <div class="pcaf__bottom">
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved.</p>
+    <p class="pcaf__bottom-note">New brand — first drop. No reviews yet because no one's worn it yet.</p>
+  </div>
+</footer>
+
+<style>
+  :root {
+    --pcaf-obsidian: #0B0B0C;
+    --pcaf-ivory: #F5F0E6;
+    --pcaf-gold: #B08D57;
+    --pcaf-charcoal: #1C1B1A;
+  }
+
+  .pcaf {
+    background: var(--pcaf-obsidian);
+    color: var(--pcaf-ivory);
+    font-family: "DM Sans", system-ui, sans-serif;
+    border-top: 1px solid rgba(176, 141, 87, .18);
+  }
+
+  .pcaf__top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr 1fr 1.3fr;
+    gap: 40px;
+    padding: 72px clamp(28px, 6vw, 96px) 48px;
+    max-width: 1500px;
+    margin: 0 auto;
+  }
+
+  .pcaf__mark {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    color: var(--pcaf-ivory);
+    margin-bottom: 18px;
+  }
+
+  .pcaf__monogram {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--pcaf-gold);
+    color: var(--pcaf-gold);
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 16px;
+    letter-spacing: .04em;
+    flex-shrink: 0;
+  }
+
+  .pcaf__wordmark {
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 26px;
+    font-weight: 300;
+  }
+
+  .pcaf__tagline {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(245, 240, 230, .65);
+    margin: 0 0 16px;
+    max-width: 320px;
+  }
+
+  .pcaf__social {
+    display: flex;
+    gap: 16px;
+  }
+
+  .pcaf__social a {
+    font-size: 12px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--pcaf-gold);
+    text-decoration: none;
+  }
+
+  .pcaf__social a:hover {
+    text-decoration: underline;
+  }
+
+  .pcaf__col-heading {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .14em;
+    color: var(--pcaf-gold);
+    margin: 0 0 18px;
+  }
+
+  .pcaf__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .pcaf__links a {
+    font-size: 14px;
+    color: rgba(245, 240, 230, .75);
+    text-decoration: none;
+  }
+
+  .pcaf__links a:hover {
+    color: var(--pcaf-ivory);
+  }
+
+  .pcaf__signup-copy {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(245, 240, 230, .65);
+    margin: 0 0 20px;
+  }
+
+  .pcaf__signup-field {
+    display: flex;
+    border: 1px solid rgba(176, 141, 87, .4);
+    background: var(--pcaf-charcoal);
+  }
+
+  .pcaf__signup-field input[type="email"] {
+    flex: 1;
+    min-width: 0;
+    background: transparent;
+    border: none;
+    color: var(--pcaf-ivory);
+    font-family: inherit;
+    font-size: 14px;
+    padding: 14px 16px;
+  }
+
+  .pcaf__signup-field input[type="email"]::placeholder {
+    color: rgba(245, 240, 230, .4);
+  }
+
+  .pcaf__signup-field input[type="email"]:focus {
+    outline: none;
+  }
+
+  .pcaf__signup-btn {
+    border: none;
+    background: var(--pcaf-ivory);
+    color: var(--pcaf-obsidian);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 0 24px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .pcaf__signup-btn:hover {
+    background: var(--pcaf-gold);
+  }
+
+  .pcaf__signup-success {
+    font-size: 14px;
+    color: var(--pcaf-gold);
+    margin: 0;
+  }
+
+  .pcaf__signup-error {
+    font-size: 13px;
+    color: #e8a87c;
+    margin: 10px 0 0;
+  }
+
+  .pcaf__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 24px clamp(28px, 6vw, 96px) 32px;
+    max-width: 1500px;
+    margin: 0 auto;
+    border-top: 1px solid rgba(176, 141, 87, .12);
+  }
+
+  .pcaf__bottom p {
+    margin: 0;
+    font-size: 12px;
+    color: rgba(245, 240, 230, .5);
+  }
+
+  @media (max-width: 1100px) {
+    .pcaf__top {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .pcaf__brand,
+    .pcaf__signup {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .pcaf__top {
+      padding: 56px 24px 40px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .pcaf__top {
+      grid-template-columns: 1fr;
+    }
+
+    .pcaf__signup-field {
+      flex-direction: column;
+    }
+
+    .pcaf__signup-btn {
+      padding: 14px;
+    }
+
+    .pcaf__bottom {
+      flex-direction: column;
+      padding: 24px 24px 32px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "PCA Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Wardrobe for the Rare Ones. Luxury layers for Sphynx, Devon Rex, and every hairless breed."
+    },
+    {
+      "type": "text",
+      "id": "signup_copy",
+      "label": "Email signup copy",
+      "default": "Early access to wardrobe drops, restocks, and launch notes."
+    },
+    {
+      "type": "text",
+      "id": "support_email",
+      "label": "Support email",
+      "default": "sales@pussycatalley.com"
+    },
+    {
+      "type": "url",
+      "id": "bonnet_url",
+      "label": "Bath Bonnet product URL",
+      "info": "Leave blank to fall back to the homepage."
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL",
+      "info": "Leave blank to hide social links."
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL",
+      "info": "Leave blank to hide social links."
+    }
+  ]
+}
+{% endschema %}
