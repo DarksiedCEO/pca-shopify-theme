@@ -8,7 +8,7 @@ Prepared by Conversion Grandmaster Ω. Applies the Constitution's non-negotiable
 **Revision log:**
 - 2026-07-09 — corrections applied per business owner review: removed unproven "fabric tested" claim and unconfirmed founder-ownership claim (replaced with honest, provable language); launch-scope decision recorded in §12.
 - 2026-07-09 (later) — **launch facts approved by business owner, brackets resolved:**
-  - Support email: `support@pussycatalley.com` — **must be verified as a real working inbox before launch**; if not yet set up, this is a launch blocker.
+  - Support email: `sales@pussycatalley.com` — confirmed 2026-07-09 as the store's only real working inbox (support@ does NOT exist; corrected from earlier draft). May add support@ later.
   - Processing: 1–3 business days. Transit: "Most U.S. orders arrive within 5–11 business days after processing. Delivery times may vary by location and carrier conditions."
   - Return window: 14 days after delivery, unworn/unused items in original condition only.
   - Hygiene policy (exact wording): "Worn pet apparel and used bath accessories cannot be returned or exchanged for hygiene reasons."
