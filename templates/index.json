@@ -11,44 +11,202 @@
   "sections": {
     "pca_wardrobe_landing": {
       "type": "pca-wardrobe-landing",
+      "blocks": {
+        "trust-1": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Curated for hairless breeds"
+          }
+        },
+        "trust-2": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Secure checkout"
+          }
+        },
+        "trust-3": {
+          "type": "trust_item",
+          "settings": {
+            "text": "Buy 2, save 10% · Buy 3, save 15%"
+          }
+        },
+        "trust-4": {
+          "type": "trust_item",
+          "settings": {
+            "text": "New brand — first drop"
+          }
+        },
+        "product-1": {
+          "type": "product",
+          "settings": {
+            "product": "rare-skin-turtleneck",
+            "name_fallback": "Rare Skin Turtleneck™",
+            "descriptor": "Soft polar fleece, cut close for warmth without weight.",
+            "price_fallback": "$29.99"
+          }
+        },
+        "product-2": {
+          "type": "product",
+          "settings": {
+            "product": "alley-scholar-collection",
+            "name_fallback": "Alley Scholar Collection™",
+            "descriptor": "British-tailored statement pieces — every piece sold separately.",
+            "price_fallback": "From $39.99"
+          }
+        },
+        "product-3": {
+          "type": "product",
+          "settings": {
+            "product": "rare-skin-lounge-hoodie",
+            "name_fallback": "Rare Skin Lounge Hoodie™",
+            "descriptor": "Heavier weight for lounging season.",
+            "price_fallback": "$32.99"
+          }
+        },
+        "product-5": {
+          "type": "product",
+          "settings": {
+            "product": "alley-stripe-summer-suit",
+            "name_fallback": "Alley Stripe Summer Suit™",
+            "descriptor": "Fine-stripe, lightweight, unmistakably tailored.",
+            "price_fallback": "$24.99"
+          }
+        },
+        "product-6": {
+          "type": "product",
+          "settings": {
+            "product": "rare-skin-bath-bonnet",
+            "name_fallback": "Rare Skin Bath Bonnet™",
+            "descriptor": "Ear protection for bath day, in five colors.",
+            "price_fallback": "$14.99"
+          }
+        },
+        "style-1": {
+          "type": "style_guide_item",
+          "settings": {
+            "use_case": "Best for everyday warmth",
+            "recommended_product": "Rare Skin Turtleneck™"
+          }
+        },
+        "style-2": {
+          "type": "style_guide_item",
+          "settings": {
+            "use_case": "Best for lounging",
+            "recommended_product": "Rare Skin Lounge Hoodie™"
+          }
+        },
+        "style-4": {
+          "type": "style_guide_item",
+          "settings": {
+            "use_case": "Best for summer",
+            "recommended_product": "Alley Stripe Summer Suit™"
+          }
+        },
+        "style-5": {
+          "type": "style_guide_item",
+          "settings": {
+            "use_case": "Best statement piece",
+            "recommended_product": "Alley Scholar Collection™"
+          }
+        },
+        "style-6": {
+          "type": "style_guide_item",
+          "settings": {
+            "use_case": "Best bath-care add-on",
+            "recommended_product": "Rare Skin Bath Bonnet™"
+          }
+        },
+        "promise-1": {
+          "type": "promise_item",
+          "settings": {
+            "text": "Every piece selected and fit-checked specifically for hairless and thin-coated breeds, not repurposed generic pet apparel."
+          }
+        },
+        "promise-2": {
+          "type": "promise_item",
+          "settings": {
+            "text": "Sized by weight and measurement, not guesswork."
+          }
+        },
+        "promise-3": {
+          "type": "promise_item",
+          "settings": {
+            "text": "Every piece hand-inspected before it ships."
+          }
+        }
+      },
+      "block_order": [
+        "trust-1",
+        "trust-2",
+        "trust-3",
+        "trust-4",
+        "product-1",
+        "product-2",
+        "product-3",
+        "product-5",
+        "product-6",
+        "style-1",
+        "style-2",
+        "style-4",
+        "style-5",
+        "style-6",
+        "promise-1",
+        "promise-2",
+        "promise-3"
+      ],
       "settings": {
         "announce_message_1": "NEW: The Rare Ones Wardrobe is live — Buy 2, Save 10% · Buy 3, Save 15%",
+        "announce_message_2": "Free shipping on orders over $65",
+        "hero_video_url": "",
+        "hero_heading": "Wardrobe for the Rare Ones.",
+        "hero_subheading": "Luxury layers cut for Sphynx, Devon Rex, and every hairless breed — for cats who were never ordinary.",
+        "hero_primary_text": "Shop The Rare Ones Wardrobe",
+        "hero_primary_url": "",
+        "hero_secondary_text": "Find Your Cat's Size",
+        "hero_secondary_url": "",
+        "hero_trust_microcopy": "Curated for hairless breeds · Secure checkout",
         "hero_discount_teaser": "Dressing more than one? Buy 2, save 10%.",
+        "collection_eyebrow": "The Rare Ones Wardrobe",
+        "collection_heading": "The first drop.",
+        "offer_eyebrow": "Build Their Wardrobe",
+        "offer_heading": "The more they wear, the more you save.",
         "offer_tier_2_text": "Buy any 2 wardrobe pieces, save 10% automatically at checkout.",
         "offer_tier_3_text": "Buy any 3 wardrobe pieces, save 15% automatically at checkout.",
+        "offer_note": "Savings apply automatically in your cart — no code needed.",
+        "addon_eyebrow": "Complete The Ritual",
+        "addon_heading": "Rare Skin Bath Bonnet™",
         "addon_body": "Ear protection for bath day, in five colors. Add it to any wardrobe order and it joins your savings automatically.",
-        "support_email": "sales@pussycatalley.com",
+        "addon_product": "rare-skin-bath-bonnet",
+        "addon_cta_text": "Add To Any Order",
+        "education_eyebrow": "Why Layers Matter",
+        "education_heading": "Warmth isn't optional for a coatless cat.",
+        "education_body": "Hairless and thin-coated breeds lose body heat faster and can feel cold indoor temperatures that other cats barely notice. Layers aren't a costume — they're comfort, built for skin that has no fur to regulate it.",
+        "education_image": "shopify://shop_images/pca-education-warmth-v1.png",
+        "style_guide_eyebrow": "Find Their Fit",
+        "style_guide_heading": "Which piece is right for them?",
+        "size_guide_eyebrow": "Sizing Confidence",
+        "size_guide_heading": "Measure once. Order right the first time.",
+        "size_guide_body": "Every product page has a size chart based on chest measurement and weight — not breed guesswork. We'd rather you measure twice than order once.",
+        "size_guide_cta_text": "Ask Us Before You Order",
+        "founder_eyebrow": "Why Pussycat Alley Exists",
+        "founder_note": "<p>Pussycat Alley was built for Sphynx, Devon Rex, Cornish Rex, Peterbald, and other hairless-cat families who need care, warmth, and products designed around their cats' specific needs.</p>",
+        "new_brand_heading": "This is our first drop.",
+        "new_brand_body": "We don't have reviews yet — because no one's worn it yet. Here's what we do have:",
+        "sizing_policy_heading": "Sizing Confidence",
+        "sizing_policy_body": "We'd rather you measure twice than order once. Full size chart on every product page.",
+        "hygiene_policy_heading": "Hygiene Policy",
+        "hygiene_policy_body": "Worn pet apparel and used bath accessories cannot be returned or exchanged for hygiene reasons.",
+        "shipping_policy_heading": "Shipping",
         "processing_days": "1–3 business days",
         "transit_days": "5–11 business days",
         "return_window_days": "14",
-        "hygiene_policy_body": "Worn pet apparel and used bath accessories cannot be returned or exchanged for hygiene reasons.",
-        "addon_product": "rare-skin-bath-bonnet"
-      },
-      "blocks": {
-        "trust-1": { "type": "trust_item", "settings": { "text": "Curated for hairless breeds" } },
-        "trust-2": { "type": "trust_item", "settings": { "text": "Secure checkout" } },
-        "trust-3": { "type": "trust_item", "settings": { "text": "Buy 2, save 10% · Buy 3, save 15%" } },
-        "trust-4": { "type": "trust_item", "settings": { "text": "New brand — first drop" } },
-        "product-1": { "type": "product", "settings": { "product": "rare-skin-turtleneck", "name_fallback": "Rare Skin Turtleneck™", "descriptor": "Soft polar fleece, cut close for warmth without weight.", "price_fallback": "$29.99" } },
-        "product-2": { "type": "product", "settings": { "product": "alley-scholar-collection", "name_fallback": "Alley Scholar Collection™", "descriptor": "British-tailored statement pieces — every piece sold separately.", "price_fallback": "From $39.99" } },
-        "product-3": { "type": "product", "settings": { "product": "rare-skin-lounge-hoodie", "name_fallback": "Rare Skin Lounge Hoodie™", "descriptor": "Heavier weight for lounging season.", "price_fallback": "$32.99" } },
-        "product-5": { "type": "product", "settings": { "product": "alley-stripe-summer-suit", "name_fallback": "Alley Stripe Summer Suit™", "descriptor": "Fine-stripe, lightweight, unmistakably tailored.", "price_fallback": "$24.99" } },
-        "product-6": { "type": "product", "settings": { "product": "rare-skin-bath-bonnet", "name_fallback": "Rare Skin Bath Bonnet™", "descriptor": "Ear protection for bath day, in five colors.", "price_fallback": "$14.99" } },
-        "style-1": { "type": "style_guide_item", "settings": { "use_case": "Best for everyday warmth", "recommended_product": "Rare Skin Turtleneck™" } },
-        "style-2": { "type": "style_guide_item", "settings": { "use_case": "Best for lounging", "recommended_product": "Rare Skin Lounge Hoodie™" } },
-        "style-4": { "type": "style_guide_item", "settings": { "use_case": "Best for summer", "recommended_product": "Alley Stripe Summer Suit™" } },
-        "style-5": { "type": "style_guide_item", "settings": { "use_case": "Best statement piece", "recommended_product": "Alley Scholar Collection™" } },
-        "style-6": { "type": "style_guide_item", "settings": { "use_case": "Best bath-care add-on", "recommended_product": "Rare Skin Bath Bonnet™" } },
-        "promise-1": { "type": "promise_item", "settings": { "text": "Every piece selected and fit-checked specifically for hairless and thin-coated breeds, not repurposed generic pet apparel." } },
-        "promise-2": { "type": "promise_item", "settings": { "text": "Sized by weight and measurement, not guesswork." } },
-        "promise-3": { "type": "promise_item", "settings": { "text": "Every piece hand-inspected before it ships." } }
-      },
-      "block_order": [
-        "trust-1", "trust-2", "trust-3", "trust-4",
-        "product-1", "product-2", "product-3", "product-5", "product-6",
-        "style-1", "style-2", "style-4", "style-5", "style-6",
-        "promise-1", "promise-2", "promise-3"
-      ]
+        "support_email": "sales@pussycatalley.com",
+        "faq_heading": "Questions before you order?",
+        "final_cta_heading": "For the rare ones. For yours.",
+        "final_cta_body": "Build their wardrobe today — save automatically when you dress them for more than one occasion.",
+        "final_cta_text": "Shop The Rare Ones Wardrobe",
+        "final_cta_url": ""
+      }
     }
   },
   "order": [
