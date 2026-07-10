@@ -20,16 +20,20 @@
   {%- comment -%} ── 2. Video hero ── {%- endcomment -%}
   <div class="pcaw-hero">
     <div class="pcaw-hero__media">
+      {%- comment -%}
+        Video files can't live in theme assets (Shopify rejects them, which fails the whole
+        GitHub sync). Upload the hero video to Content → Files and paste its CDN URL into
+        the "Hero video URL" setting. Until then the poster renders as a static hero image.
+      {%- endcomment -%}
       {%- if section.settings.hero_video_url != blank -%}
         <video class="pcaw-hero__video" autoplay muted loop playsinline
           poster="{% if section.settings.hero_poster != blank %}{{ section.settings.hero_poster | image_url: width: 1600 }}{% else %}{{ 'pca-wardrobe-hero-poster.jpg' | asset_url }}{% endif %}">
           <source src="{{ section.settings.hero_video_url }}" type="video/mp4">
         </video>
+      {%- elsif section.settings.hero_poster != blank -%}
+        {{ section.settings.hero_poster | image_url: width: 1800 | image_tag: loading: 'eager', class: 'pcaw-hero__video', alt: section.settings.hero_heading }}
       {%- else -%}
-        <video class="pcaw-hero__video" autoplay muted loop playsinline
-          poster="{{ 'pca-wardrobe-hero-poster.jpg' | asset_url }}">
-          <source src="{{ 'pca-wardrobe-hero-video.mp4' | asset_url }}" type="video/mp4">
-        </video>
+        <img class="pcaw-hero__video" src="{{ 'pca-wardrobe-hero-poster.jpg' | asset_url }}" alt="{{ section.settings.hero_heading | escape }}" loading="eager" width="1280" height="720">
       {%- endif -%}
       <div class="pcaw-hero__scrim"></div>
     </div>
