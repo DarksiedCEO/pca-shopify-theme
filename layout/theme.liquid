@@ -2,6 +2,17 @@
 <html lang="{{ request.locale.iso_code }}">
 <head>
   <meta charset="utf-8">
+  {%- comment -%}
+    shop.pussycatalley.com is now checkout-only; the storefront is pussycatalley.com (headless).
+    Old links (e.g. the Instagram bio) land on this homepage, so forward it there, keeping
+    any ?utm_ query string. Only the homepage is forwarded: product, cart and checkout pages
+    keep working. Skipped inside the theme editor so the theme can still be edited.
+  {%- endcomment -%}
+  {%- if template.name == 'index' and request.design_mode == false -%}
+    <meta name="robots" content="noindex">
+    <script>window.location.replace('https://pussycatalley.com/' + window.location.search);</script>
+    <noscript><meta http-equiv="refresh" content="0; url=https://pussycatalley.com/"></noscript>
+  {%- endif -%}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
   <meta name="theme-color" content="#070707">
