@@ -3,15 +3,30 @@
 <head>
   <meta charset="utf-8">
   {%- comment -%}
-    shop.pussycatalley.com is now checkout-only; the storefront is pussycatalley.com (headless).
-    Old links (e.g. the Instagram bio) land on this homepage, so forward it there, keeping
-    any ?utm_ query string. Only the homepage is forwarded: product, cart and checkout pages
-    keep working. Skipped inside the theme editor so the theme can still be edited.
+    shop.pussycatalley.com is checkout-only; the storefront is pussycatalley.com (headless).
+    Forward the old storefront pages there, keeping any query string (UTMs). Forwarded:
+    home, products (same handles), collections, collection list, search, the old fountain page.
+    NOT forwarded: cart, checkout, account, policies and pages (the privacy opt-out page lives
+    here), 404, password. Skipped inside the theme editor so the theme can still be edited.
   {%- endcomment -%}
-  {%- if template.name == 'index' and request.design_mode == false -%}
+  {%- assign pca_target = '' -%}
+  {%- case template.name -%}
+    {%- when 'index' -%}
+      {%- assign pca_target = 'https://pussycatalley.com/' -%}
+    {%- when 'product' -%}
+      {%- assign pca_handle = product.handle | url_encode -%}{%- assign pca_target = 'https://pussycatalley.com/products/' | append: pca_handle -%}
+    {%- when 'collection' or 'list-collections' or 'search' -%}
+      {%- assign pca_target = 'https://pussycatalley.com/shop' -%}
+    {%- when 'page' -%}
+      {%- if template.suffix == 'obsidian-fountain' -%}
+        {%- assign pca_target = 'https://pussycatalley.com/' -%}
+      {%- endif -%}
+  {%- endcase -%}
+  {%- if pca_target != '' and request.design_mode == false -%}
     <meta name="robots" content="noindex">
-    <script>window.location.replace('https://pussycatalley.com/' + window.location.search);</script>
-    <noscript><meta http-equiv="refresh" content="0; url=https://pussycatalley.com/"></noscript>
+    <link rel="canonical" href="{{ pca_target }}">
+    <script>window.location.replace({{ pca_target | json }} + window.location.search);</script>
+    <noscript><meta http-equiv="refresh" content="0; url={{ pca_target }}"></noscript>
   {%- endif -%}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0">
@@ -28,7 +43,7 @@
     <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
 
-  <link rel="canonical" href="{{ canonical_url }}">
+  {%- if pca_target == blank -%}<link rel="canonical" href="{{ canonical_url }}">{%- endif -%}
 
   {% if settings.favicon %}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png">
